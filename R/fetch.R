@@ -39,8 +39,8 @@ neuromorpho_is_api_healthy <- function(neuromorpho_url = "http://neuromorpho.org
 
 #' @title Make multiple asynchronous http requests to neuromorpho.org
 #'
-#' @description Make batches of AJAX style concurrent requests. used to run multiple asynchronous tasks in parallel
-#' and wait for them all to complete before further processing.
+#' @description Make batches of AJAX style concurrent requests. Used to run multiple asynchronous tasks in parallel
+#' and wait for them all to complete before further batch-wise processing.
 #' @inheritParams neuromorpho_read_neurons
 #' @param urls URLs to be queried
 #' @param FUN a function to run on the responses to requests made using \code{urls}. 
