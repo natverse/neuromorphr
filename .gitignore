@@ -1,0 +1,6 @@
+inst/doc
+*.rda
+*.rds
+packrat/lib*/
+.Rproj.user
+.Rhistory

@@ -1,0 +1,116 @@
+---
+title: "plot-neuromorpho-neurons"
+author: "Alexander Bates"
+date: "2019-04-29"
+output: rmarkdown::html_vignette:
+  fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{plot-neuromorpho-neurons}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Whales vs. elephants
+
+> "THE most obvious differences between different animals are differences 
+of size, but for some reason the zoologists have paid singularly little 
+attention to them. In a large textbook of zoology before me I find no 
+indication that the eagle is larger than the sparrow, or the hippopotamus 
+bigger than the hare, though some grudging admissions are made in the case 
+of the mouse and the whale. But yet it is easy to show that a hare could not 
+be as large as a hippopotamus, or a while as small as a herring. For every 
+type of animal there is a most convenient size, and a large change in size 
+inevitably carries with it a change of form."
+([J.B.S. Haldane](https://archive.org/stream/OnBeingTheRightSize-J.B.S.Haldane/rightsize_djvu.txt))
+
+It's not often that you get to see neurons from both whales and elephants. I wonder which animal has the larger neurons? And what papers describe them? We can use `neuromorphr` alongside its dependency, `nat` to plot neurons hosted and curated by [neuromorpho.org](http://neuromorpho.org)
+
+## Find neurons
+
+First, we need to find neuron names or neuron IDs for morphologies hosted on [neuromorpho.org](http://neuromorpho.org). These are required, because we need at least one of these two bits of information in order to read neurons from the repository.
+
+To find these items, let us search the repository for neurons from the two groups of animal in which we are interested:
+
+```{r find.neurons}
+# Hello neuromorpho.org, can you hear us?
+neuromorpho_is_api_healthy() # Check to see if we can talk to the neuromorpho API, otherwise we cannot continue
+
+# Do they have these two big beasts?
+all.species = neuromorpho_field_entries(field="species")
+whales = all.species[grepl("whale",all.species)]
+print(whales)
+elephants = all.species[grepl("elephant",all.species)]
+print(elephants)
+
+# Can we get some whale neurons
+whale.df = neuromorpho_search(search_terms="species:humpback whale")
+
+# And the elephant ones!
+elephant.df = neuromorpho_search(search_terms="species:elephant")
+
+# But we probably cannot easily compare different cell types. Which types do we have?
+tw = table(whale.df$cell_type)
+message("whale cell types:")
+kable(tw)
+te = table(elephant.df$cell_type)
+message("elephant cell types:")
+kable(te)
+
+# Let's take only the pyramidal cells
+whale.neuron_names = subset(whale.df, grepl("pyramidal",cell_type))$neuron_name
+elephant.neuron_names = subset(elephant.df, grepl("pyramidal",cell_type))$neuron_name
+
+```
+
+## Read neurons
+
+Armed with this information, we can now read the neurons as `nat` package `neuronlist` objects. You can find a detailed explanation of this data format, and its basic manipulation with `nat` tools, [here](https://jefferis.github.io/nat/).
+
+Sometimes reading neurons can take a while, because [neuromorpho.org](http://neuromorpho.org) is fairly slow. We'll want to have `progress = TRUE` on in the following functions, so that we get a sense for how long it's taking.
+
+These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `bit.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
+
+```{r read.neurons}
+# Read the whale neurons
+whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, bit.size = 10, nat = TRUE, progress = TRUE)
+
+# And read the elephant neurons
+elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuron_names, bit.size = 10, nat = TRUE, progress = TRUE)
+```
+
+## Plot neurons
+
+Let's plot these neocortical pyramidal cells. It is important to note that since neurons are reconstructed from many different neural systems and species, there is no 'standard' orientation. Instead, neuromorpho.org's standardisation process orients the morphologies by placing the soma in the origin of coordinates and aligning the first three principal components of all XYZ coordinates with heights, width, and depth. 
+
+```{r plot.neurons, fig.show='hold', fig.cap = "whale,elephant pyramidal neurons"}
+# Hold right click to pan
+nat::nopen3d()
+plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
+plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
+
+```
+
+## Of Mice and Whales
+
+So that's interesting. But what abotu a small mammal - like a mouse? Can we quickly do the same for this wee beastie?
+
+```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons"}
+# Find
+mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neocortex")) # takes a while, there's a lot of mouse data to lok through!
+mouse.neuron_name = mouse.df$neuron_name[grepl("pyramidal",mouse.df$cell_type)]
+# Read
+mouse.pyramidal.cells = neuromorpho_read_neurons(neuron_name = mouse.neuron_name, bit.size = 10, nat = TRUE, progress = TRUE)
+# Plot
+nat::nopen3d()
+plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
+plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
+plot3d(mouse.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("darkolivegreen1","darkolivegreen4"))(length(mouse.pyramidal.cells)))
+
+```

@@ -1,0 +1,27 @@
+Package: neuromorphr
+Type: Package
+Title: R client utilities for interacting with the neuromorpho.org repository
+Year: 2019
+Authors@R: c(
+    person("Alexander", "Bates", email = "alexander.shakeel.bates@gmail.com", role = c("aut", "cre"), 
+    comment = c(ORCID = "0000-0002-1195-0445"))
+    )
+Description: Access to the neuromorpoh.org repository (version 7.7 ), enabling users to easily find and use neurons in this repository with nat family packages.
+    This respository is a centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. 
+    It is continuously updated as new morphological reconstructions are collected, published, and shared. 
+    To date, neuromorpho.org is the largest collection of publicly accessible 3D neuronal reconstructions and associated metadata.
+    Principally curated by Georgio Ascoli at George Mason university, contact the curators at: neuromorpho@gmail.com
+License: GPL-3
+LazyData: true
+Suggests: 
+    spelling,
+    knitr,
+    rmarkdown
+Depends: R (>= 2.10)
+Imports: httr, jsonlite, pbapply, nat, curl
+Encoding: UTF-8
+Language: en-GB
+RoxygenNote: 6.1.1
+URL: https://github.com/jefferislab/neuromorphr
+BugReports: https://github.com/jefferislab/neuromorphr/issues
+VignetteBuilder: knitr
