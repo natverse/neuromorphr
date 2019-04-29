@@ -11,7 +11,7 @@
 #' @return TRUE if the API can be reached, FALSE with a warning, if not
 #' @seealso \code{\link{neuromorpho_search}}, 
 #' \code{\link{neuromorpho_read_neurons}},
-#' \code{\link{neuromorpho_info}}
+#' \code{\link{neuromorpho_neurons_info}}
 #' @examples
 #' \dontrun{
 #' ## Check if the neuromorpho API is healthy
@@ -45,9 +45,6 @@ neuromorpho_is_api_healthy <- function(neuromorpho_url = "http://neuromorpho.org
 #' @param urls URLs to be queried
 #' @param FUN a function to run on the responses to requests made using \code{urls}. 
 #' If NULL, the response is returned without any processing. The default is to parse returned JSON format.
-#' @param progress if \code{TRUE} or a numeric value, a progress bar is shown. 
-#' The bar progresses when each batch is completed.
-#' If \code{TRUE}, or \code{100}, the bar completes where all batches are done.
 #' @param message a message to be given alongside progress bar
 #' @param ... methods passed to \code{FUN}
 #' @details Speed querying neuromorpho.org by making batches of AJAX style concurrent requests, 
@@ -55,7 +52,7 @@ neuromorpho_is_api_healthy <- function(neuromorpho_url = "http://neuromorpho.org
 #' @return a list of data retrieved from the requests defined by \code{urls}, and processed by \code{FUN}
 #' @seealso  
 #' \code{\link{neuromorpho_read_neurons}}
-#' @example
+#' @examples
 #' \dontrun{ 
 #' # Let's just grab metadata for all neurons in neuromorpho
 #' all.species = neuromorpho_field_entries(field="species)

@@ -6,21 +6,32 @@
 \title{Get some of the meta data associated with a neuron}
 \usage{
 neuromorpho_neurons_meta(neuron_name = NULL, neuron_id = NULL,
-  light = TRUE, progress = TRUE,
+  light = TRUE, progress = TRUE, batch.size = 10,
   neuromorpho_url = "http://neuromorpho.org", ...)
 
 neuromorpho_neuron_meta(neuron_name = NULL, neuron_id = NULL,
   light = TRUE, neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
+\item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
+can be found by searching the repository, for example via \code{neuromorpho_search}}
+
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.}
 
 \item{light}{if TRUE, the only a subset of the full meta data for each neurons is returned with the resulting \code{\link[nat]{neuronlist}}.}
 
+\item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
+The bar progresses when each batch is completed.
+If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
+
+\item{batch.size}{the number of requests sent at once to the neuromorpho.org, using \code{\link[curl]{multi_run}}. 
+Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
+Increasing the value of \code{batch.size} may reduce read time.}
+
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 a data frame, with one entry per neuron queried

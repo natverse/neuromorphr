@@ -16,7 +16,7 @@ Only meta data for neurons that have the entries described for all given search 
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \description{
 Search for literature in the neuromorpho.org repository. The returned 
@@ -40,7 +40,7 @@ lit.search = neuromorpho_literature_search(field="species:Drosophila melanogaste
 ## We have found this many papers
 print(nrow(lit.search))
 
-## Hmm, note that this is a little different from what we get when we pull this information for neurons
+## Note this is a little different from what we get when we pull this information for neurons
 neuron.fields = neuromorpho_field_entries(field="species")
 print(neuron.fields)
 }

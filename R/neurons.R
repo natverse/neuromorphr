@@ -8,15 +8,14 @@
 #' (see details on \href{http://neuromorpho.org/StdSwc1.21.jsp}{standardisation process}),
 #' and a set of morphometric features (see details on available \href{http://neuromorpho.org/myfaq.jsp?id=qr4#QS3}{measures}).
 #' @param neuron_name a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
-#' can be found by searching the repository, for example via \code{\link{neuromorpho_search}
+#' can be found by searching the repository, for example via \code{neuromorpho_search}
 #' @param neuron_id a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 #' this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.
 #' @param nat if TRUE, neurons are returned formatted as a \code{\link[nat]{neuron}} object, in a \code{\link[nat]{neuronlist}} 
-#' See details for more information. 
-#' Otherwise, a data frame is returned in the \href{http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html}{SWC} file type format.
-#' If TRUE, the resulting neuronlist object's associated meta data will be pulled using \code{\link{neuromorpho_neuron_meta}}
-#' @param meta if TRUE, meta data is retreived for the returned \code{neuronlist} or \url{list} object, 
-#' using \code{\link{neuromorpho_neuron_meta}.
+#' See details for more information. Otherwise, a data frame is returned in the \href{http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html}{SWC} file type format.
+#' If TRUE, the resulting neuronlist object's associated meta data will be pulled using \code{neuromorpho_neuron_meta}
+#' @param meta if TRUE, meta data is retrieved for the returned \code{neuronlist} or \code{list} object, 
+#' using \code{neuromorpho_neuron_meta}.
 #' @param light if TRUE, the only a subset of the full meta data for each neurons is returned with the resulting \code{\link[nat]{neuronlist}}.
 #' @param batch.size the number of requests sent at once to the neuromorpho.org, using \code{\link[curl]{multi_run}}. 
 #' Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
@@ -25,7 +24,10 @@
 #' than setting \code{find = FALSE} and using the standard neuromorpho.org format for the download link. If the database changes, or you cannot find your neuron 
 #' even though you know it exists, try setting \code{find = TRUE}
 #' @param neuromorpho_url the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}
-#' @param ... methods passed to \code{\link{neuromorpho_async_req}}, or in some cases, \code{\link{neuromorpho_fetch}}
+#' @param progress if \code{TRUE} or a numeric value, a progress bar is shown. 
+#' The bar progresses when each batch is completed.
+#' If \code{TRUE}, or \code{100}, the bar completes where all batches are done.
+#' @param ... methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}
 #' @details A single neuron can be read using using \code{neuromorpho_read_neuron},
 #'  or multiple using \code{neuromorpho_read_neurons}. If \code{nat = TRUE}, 
 #'  then neurons are returned as a \code{\link[nat]{neuron}} object,
@@ -47,7 +49,7 @@
 #' @return if \code{nat = TRUE}, then a neuronlist object is returned. 
 #' If FALSE, then a list of data frames for neuron morphologies in 
 #' \href{http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html}{SWC} format are returned.
-#' @seealso \code{\link{neuromorpho_neuron_info}}, \code{\link{neuromorpho_neuron_meta}}
+#' @seealso \code{\link{neuromorpho_neurons_info}}, \code{\link{neuromorpho_neurons_meta}}
 #' @examples
 #' \dontrun{ # Let's get all the elephant neurons in the repository
 #' 
@@ -68,7 +70,7 @@
 #' nopen3d()
 #' plot3d(elephant.principal.cells, soma=T)
 #' 
-#' ## And get some summary information on the skeleton we have retreived
+#' ## And get some summary information on the skeleton we have retrieved
 #' summary(elephant.principal.cells)
 #' }
 #' @export
@@ -80,33 +82,34 @@ neuromorpho_read_neurons <- function(neuron_name = NULL,
                                      meta = TRUE,
                                      light = TRUE,
                                      find = FALSE,
+                                     progress = TRUE,
                                      neuromorpho_url = "http://neuromorpho.org",
                                      ...){
   neuromorpho_is_api_healthy()
   if(is.null(neuron_name)){
     neuron_name = neuromorpho_names_from_ids(neuron_id = neuron_id, neuromorpho_url = neuromorpho_url, ...)
   }
-  paths = paste0(neuromorpho_url,"/neuron_info.jsp?neuron_name=", neuron_name)
-  batches = ceiling(length(paths)/batch.size)
   if(meta|!find){
     df = neuromorpho_neurons_meta(neuron_name = neuron_name,
                                   neuron_id = NULL,
                                   light = light,
                                   neuromorpho_url = neuromorpho_url,
-                                  #progress = progress,
+                                  progress = progress,
                                   ...)
-    archives = df$archive
+    archives = sapply(df$archive, FirstLower)
+    neuron_name = df$neuron_name
   }
   if(find){
-    swc.urls = unlist(neuromorpho_async_req(urls=paths, batch.size = batch.size, FUN = neuromorpho_get_swc_url, progress = 100, message = "finding neuromorpho neurons"))
+    paths = paste0(neuromorpho_url,"/neuron_info.jsp?neuron_name=", neuron_name)
+    swc.urls = unlist(neuromorpho_async_req(urls=paths, batch.size = batch.size, FUN = neuromorpho_get_swc_url, progress = progress, message = "finding neuromorpho neurons"))
   }else{
-    swc.urls = paste0("http://neuromorpho.org/dableFiles/", archives, "/CNG%20version/", df$neuron_name,".CNG.swc")
+    swc.urls = sapply(seq_along(neuron_name), function(x)
+      paste0("http://neuromorpho.org/dableFiles/", archives[x], "/CNG%20version/", neuron_name[x],".CNG.swc"))
   }
-  resn = neuromorpho_async_req(swc.urls, batch.size = batch.size, FUN = neuromorpho_read_swc, progress = 100, message = "reading neuromorpho neurons")
-  retreived = sapply(resn, !is.na)
-  resn = resn[retreived]
-  df = df[retreived,]
-  neuron_name = neuron_name[retreived]
+  resn = neuromorpho_async_req(swc.urls, batch.size = batch.size, FUN = neuromorpho_read_swc, progress = progress, message = "reading neuromorpho neurons")
+  retrieved = !is.na(resn)
+  resn = resn[retrieved]
+  neuron_name = neuron_name[retrieved]
   if(nat){
     neurons = nat::neuronlist()
     for(swc in resn){
@@ -114,6 +117,9 @@ neuromorpho_read_neurons <- function(neuron_name = NULL,
     }
   }else{
     neurons = resn
+  }
+  if(meta|nat){
+    df = df[retrieved,]
   }
   if(meta){
     attr(neurons, "df") = df
@@ -143,7 +149,7 @@ neuromorpho_read_neuron <- function(neuron_name = NULL,
   search = "href=dableFiles.*Morphology File \\(Standardized\\)|Morphology File \\(Standardized\\).*href=dableFiles"
   html.split = unlist(strsplit(text,"</a>"))
   swc.url = gsub(".*href=|>.*", "", html.split[grepl(search,html.split)])
-  swc = read.csv(file.path(neuromorpho_url,swc.url))
+  swc = utils::read.csv(file.path(neuromorpho_url,swc.url))
   swc = swc[!grepl("#",unlist(swc)),]
   swc = do.call(rbind,lapply(swc, function(x) as.numeric(unlist(strsplit(x," ")))))
   swc = data.frame(swc)

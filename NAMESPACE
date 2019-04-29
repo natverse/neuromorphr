@@ -3,6 +3,7 @@
 export(neuromorpho_async_req)
 export(neuromorpho_field_counts)
 export(neuromorpho_field_entries)
+export(neuromorpho_field_entries_from_names)
 export(neuromorpho_fields)
 export(neuromorpho_ids_from_names)
 export(neuromorpho_is_api_healthy)

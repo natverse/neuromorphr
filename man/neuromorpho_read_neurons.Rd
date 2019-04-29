@@ -7,29 +7,43 @@
 \usage{
 neuromorpho_read_neurons(neuron_name = NULL, neuron_id = NULL,
   nat = TRUE, batch.size = 10, meta = TRUE, light = TRUE,
+  find = FALSE, progress = TRUE,
   neuromorpho_url = "http://neuromorpho.org", ...)
 
 neuromorpho_read_neuron(neuron_name = NULL, neuron_id = NULL,
   nat = TRUE, neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
+\item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
+can be found by searching the repository, for example via \code{neuromorpho_search}}
+
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.}
 
 \item{nat}{if TRUE, neurons are returned formatted as a \code{\link[nat]{neuron}} object, in a \code{\link[nat]{neuronlist}} 
-See Details for more information. 
-Otherwise, a data frame is returned in the \href{http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html}{SWC} file type format.
-If TRUE, the resulting neuronlist object's associated meta data will be pulled using \code{\link{neuromorpho_neuron_meta}}}
+See details for more information. Otherwise, a data frame is returned in the \href{http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html}{SWC} file type format.
+If TRUE, the resulting neuronlist object's associated meta data will be pulled using \code{neuromorpho_neuron_meta}}
 
 \item{batch.size}{the number of requests sent at once to the neuromorpho.org, using \code{\link[curl]{multi_run}}. 
 Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
 Increasing the value of \code{batch.size} may reduce read time.}
 
+\item{meta}{if TRUE, meta data is retrieved for the returned \code{neuronlist} or \code{list} object, 
+using \code{neuromorpho_neuron_meta}.}
+
 \item{light}{if TRUE, the only a subset of the full meta data for each neurons is returned with the resulting \code{\link[nat]{neuronlist}}.}
+
+\item{find}{if TRUE, then we scrape each neuron's webpage to find the correct link to download its SWC file. This is more stable, but more time consuming, 
+than setting \code{find = FALSE} and using the standard neuromorpho.org format for the download link. If the database changes, or you cannot find your neuron 
+even though you know it exists, try setting \code{find = TRUE}}
+
+\item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
+The bar progresses when each batch is completed.
+If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 if \code{nat = TRUE}, then a neuronlist object is returned. 
@@ -75,7 +89,7 @@ elephant.df = neuromorpho_search(search_terms="species:elephant")
 t = table(elephant.df$cell_type)
 t
 
-## We have many pyramidal cells of the cerebellum. Let's get those.
+## We have many pyramidal cells. Let's get those.
 neuron_names = subset(elephant.df, cell_type == names(t)[which.max(t)])$neuron_name
 
 ## Now we are ready to read some neurons!
@@ -85,10 +99,10 @@ elephant.principal.cells = neuromorpho_read_neurons(neuron_name = neuron_names, 
 nopen3d()
 plot3d(elephant.principal.cells, soma=T)
 
-## And get some summary information on the skeleton we have retreived
+## And get some summary information on the skeleton we have retrieved
 summary(elephant.principal.cells)
 }
 }
 \seealso{
-\code{\link{neuromorpho_neuron_info}}, \code{\link{neuromorpho_neuron_meta}}
+\code{\link{neuromorpho_neurons_info}}, \code{\link{neuromorpho_neurons_meta}}
 }

@@ -12,7 +12,7 @@ neuromorpho_literature_field_entries(field = "species",
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \description{
 Returns a list of values present in the repository for the neuron field requested.
@@ -29,7 +29,7 @@ Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS
 lit.fields = neuromorpho_literature_field_entries(field="species")
 print(lit.fields)
 
-## Hmm, note that this is a little different from what we get when we pull this information for neurons
+## Note this is a little different from what we get when we pull this information for neurons
 neuron.fields = neuromorpho_field_entries(field="species")
 print(neuron.fields)
 }

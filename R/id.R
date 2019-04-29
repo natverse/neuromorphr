@@ -23,6 +23,7 @@
 #' @rdname neuromorpho_names_from_ids
 neuromorpho_names_from_ids <- function(neuron_id,
                                        progress = TRUE,
+                                       batch.size = 10,
                                        neuromorpho_url = "http://neuromorpho.org", ...){
   paths = paste0(neuromorpho_url,"/api/neuron/id/", neuron_id)
   res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, progress = progress, ...)
@@ -34,6 +35,7 @@ neuromorpho_names_from_ids <- function(neuron_id,
 #' @rdname neuromorpho_names_from_ids
 neuromorpho_ids_from_names <- function(neuron_name,
                                        progress = TRUE,
+                                       batch.size = 10,
                                        neuromorpho_url = "http://neuromorpho.org", ...){
   paths = paste0(neuromorpho_url,"/api/neuron/name/", neuron_name)
   res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, progress = progress, ...)
@@ -42,9 +44,10 @@ neuromorpho_ids_from_names <- function(neuron_name,
   neuron_ids
 }
 #' @export
-#' @rdname neuromorpho_field_from_names
+#' @rdname neuromorpho_names_from_ids
 neuromorpho_field_entries_from_names <- function(neuron_name,
                                        progress = TRUE,
+                                       batch.size = 10,
                                        neuromorpho_url = "http://neuromorpho.org",
                                        field = "archive",
                                        ...){

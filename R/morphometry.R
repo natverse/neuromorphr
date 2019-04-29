@@ -45,8 +45,22 @@
 #' \code{\link{neuromorpho_read_neurons}}
 #' @return a list of measurements for a neuron, or a list of lists if neuron_name/neuron_id is a vector with more than one element
 #' @examples
-#' # Let's get those measurements
-#' neuron.measures = neuromorpho_morphometry()
+#' # Let's get some measurements for the
+#' 
+#' # let's get neocortical neurons from both the African elephant and the humpback whale
+#' big.neocortex.df = neuromorpho_search(search_terms= c("species:elephant,humpback whale",
+#'                                                       "brain_region:neocortex"))
+#' 
+#' ## Pull measurements, in a data frame
+#' measurements = neuromorpho_morphometry(big.neocortex.df$neuron_name, data_frame = TRUE)
+#' 
+#' ## Assign species column
+#' measurements$species = big.neocortex.df[rownames(measurements),"species"]
+#' 
+#' ## Boxlot
+#' boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
+#'      col=(c("deepskyblue1","firebrick1")),
+#'      main="neocortical neuron volumes", xlab="species")
 #' 
 #' @export
 #' @rdname neuromorpho_morphometry
@@ -66,10 +80,13 @@ neuromorpho_morphometry <- function(neuron_name = NULL,
   }else{
     paths = paste0(neuromorpho_url,"/api/morphometry/name/", neuron_name)
   }
-  res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, progress = progress, ...)
+  res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, progress = progress, message = "pulling neuromorpho measurements", ...)
   names(res) = neuron_name
-  if(data.frame){
+  res = lapply(res, nullToNA)
+  if(data_frame){
     res = do.call(rbind,res)
+    res = as.data.frame(res)
+    res[,] = unlist(res)
   }
   res
 }
@@ -124,25 +141,25 @@ neuromorpho_morphometry <- function(neuron_name = NULL,
 #' \code{\link{neuromorpho_morphometry}},
 #' \code{\link{neuromorpho_read_neurons}}
 #' @return a list of measurements for a neuron, or a list of lists if neuron_name/neuron_id is a vector with more than one element
-#' @examples
-#' # Let's get those measurements
-#' neuron.measures = neuromorpho_morphometry()
-#' 
 #' @export
 #' @rdname neuromorpho_persistence_vectors
 neuromorpho_persistence_vectors <- function(neuron_name = NULL, 
                                     neuron_id = NULL,
                                     batch.size = 10,
+                                    progress = TRUE,
                                     neuromorpho_url = "http://neuromorpho.org",
                                     ...){
   neuromorpho_is_api_healthy()
   if(is.null(neuron_name)&is.null(neuron_id)){
     stop("Please supply either a valid neuromorpho neuron name or neuron ID")
   }else if(is.null(neuron_name)){
-    neuron_id = neuromorpho_ids_from_names(neuron_name = neuron_name, neuromorpho_url = neuromorpho_url, progress = FALSE, ...)
+    neuron_id = neuromorpho_ids_from_names(neuron_name = neuron_name, 
+                                           neuromorpho_url = neuromorpho_url, 
+                                           progress = FALSE, message = "obtaining persistence vectors", ...)
   }
   paths = paste0(neuromorpho_url, "/api/pvec/id/", neuron_id)
   res = neuromorpho_async_req(urls = paths, FUN = NULL, batch.size = batch.size, progress = progress, ...)
-  
+  res = res[!is.na(res)]
+  res
 }
 

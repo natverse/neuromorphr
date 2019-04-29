@@ -16,7 +16,7 @@
 #' }
 #' @return a list containg all the meta data for a neuron stored on neuromorpho.org
 #' @seealso \code{\link{neuromorpho_search}}, 
-#' \code{\link{neuromorpho_field_meta}},
+#' \code{\link{neuromorpho_field_entries}},
 #' \code{\link{neuromorpho_fields}}
 #' @examples
 #' \dontrun{ 
@@ -33,14 +33,18 @@
 #' @rdname neuromorpho_neurons_info
 neuromorpho_neurons_info <- function(neuron_name = NULL, 
                                      neuron_id = NULL,
+                                     batch.size = 10,
+                                     progress = TRUE,
                                      neuromorpho_url = "http://neuromorpho.org", ...){
-  if(is.null(neuron_names)){
+  if(is.null(neuron_name)){
     paths = paste0(neuromorpho_url,"/api/neuron/id/", neuron_id)
   }else{
     paths = paste0(neuromorpho_url,"/api/neuron/name/", neuron_name)
   }
   res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, 
                               progress = progress, message = "reading neuromorpho metadata", ...)
+  names(res) = ifelse(is.null(neuron_name),neuron_id,neuron_name)[!is.na(res)]
+  res = res[!is.na(res)]
   nullToNA(res)
 }
 
@@ -102,17 +106,21 @@ neuromorpho_neurons_meta <- function(neuron_name = NULL,
                                     neuron_id = NULL,
                                     light = TRUE,
                                     progress = TRUE,
+                                    batch.size = 10,
                                     neuromorpho_url = "http://neuromorpho.org", ...){
-  if(is.null(neuron_names)){
+  if(is.null(neuron_name)){
     paths = paste0(neuromorpho_url,"/api/neuron/id/", neuron_id)
   }else{
     paths = paste0(neuromorpho_url,"/api/neuron/name/", neuron_name)
   }
   res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, 
                               progress = progress, message = "reading neuromorpho metadata", ...)
-  l = lapply(res,neuromorpho_process_meta)
+  res = res[!is.na(res)]
+  l = lapply(res, neuromorpho_process_meta)
   df = do.call(rbind, l)
-  rownames(df) = df$neuron_id
+  df = df[!duplicated(df$neuron_name),]
+  df[,] = unlist(df)
+  rownames(df) = df$neuron_name
   if(light){
     df = df[,c("neuron_id", "neuron_name", "species", "brain_region", "cell_type", "archive")]
   }
@@ -130,6 +138,7 @@ neuromorpho_neuron_meta <- function(neuron_name = NULL,
                                 neuromorpho_url, ...)
   ### Process neuron meta data ###
   df = neuromorpho_process_meta(res)
+  df[,] = unlist(df)
   if(light){
     df = df[,c("neuron_id", "neuron_name", "species", "brain_region", "cell_type", "archive")]
   }

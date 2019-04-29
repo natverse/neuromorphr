@@ -14,3 +14,9 @@ neuromorpho_progress <- function (x, max = 100, message = "querying neuromorpho"
     cat('\n')
 }
 
+# hidden
+FirstLower <- function(x) {
+  s <- strsplit(x, " ")[[1]]
+  paste(tolower(substring(s, 1,1)), substring(s, 2),
+        sep="", collapse=" ")
+}

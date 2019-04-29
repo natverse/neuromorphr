@@ -36,7 +36,7 @@ neuromorpho_literature_fields <- function(neuromorpho_url = "http://neuromorpho.
 #' lit.fields = neuromorpho_literature_field_entries(field="species")
 #' print(lit.fields)
 #' 
-#' ## Hmm, note that this is a little different from what we get when we pull this information for neurons
+#' ## Note this is a little different from what we get when we pull this information for neurons
 #' neuron.fields = neuromorpho_field_entries(field="species")
 #' print(neuron.fields)
 #' }
@@ -92,7 +92,7 @@ neuromorpho_literature_field_entries <- function(field = "species",
 #' ## We have found this many papers
 #' print(nrow(lit.search))
 #' 
-#' ## Hmm, note that this is a little different from what we get when we pull this information for neurons
+#' ## Note this is a little different from what we get when we pull this information for neurons
 #' neuron.fields = neuromorpho_field_entries(field="species")
 #' print(neuron.fields)
 #' }
@@ -145,7 +145,7 @@ neuromorpho_literature_field_counts <- function(field = "tracingSystem",
   pages = res$page
   if(pages$totalPages>1){
     for(page in 1:(pages$totalPages-1)){ # Pages are numbered from 0
-      resp = neuromorpho_fetch(path = paste0("api/literature/select?q=",search_terms,"&page=",page,"&size=",pages$size,"&sort=title,asc"),
+      resp = neuromorpho_fetch(path = paste0("api/literature/select?q=",field,"&page=",page,"&size=",pages$size,"&sort=title,asc"),
                                neuromorpho_url = neuromorpho_url, ...)
       fieldsp = unlist(resp$fields)
       fields = c(fields, fieldsp)
@@ -163,7 +163,7 @@ neuromorpho_literature_field_counts <- function(field = "tracingSystem",
 neuromorpho_get_article <- function(article_id,
                                     neuromorpho_url = "http://neuromorpho.org", 
                                     ...){
-  res = neuromorpho_fetch(path = pase0("api/literature/id/", article_id), neuromorpho_url = neuromorpho_url, ...)
+  res = neuromorpho_fetch(path = paste0("api/literature/id/", article_id), neuromorpho_url = neuromorpho_url, ...)
 
 }
 

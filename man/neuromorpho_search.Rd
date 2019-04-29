@@ -18,7 +18,7 @@ all rat or mouse neurons.}
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 a data data frame, where each entry is a neuron matching the query specifications.

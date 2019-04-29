@@ -10,7 +10,7 @@ neuromorpho_is_api_healthy(neuromorpho_url = "http://neuromorpho.org",
 \arguments{
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 TRUE if the API can be reached, FALSE with a warning, if not
@@ -39,5 +39,5 @@ if(neuromorpho_is_api_healthy()){
 \seealso{
 \code{\link{neuromorpho_search}}, 
 \code{\link{neuromorpho_read_neurons}},
-\code{\link{neuromorpho_info}}
+\code{\link{neuromorpho_neurons_info}}
 }

@@ -2,8 +2,9 @@
 title: "plot-neuromorpho-neurons"
 author: "Alexander Bates"
 date: "2019-04-29"
-output: rmarkdown::html_vignette:
-  fig_caption: yes
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{plot-neuromorpho-neurons}
   %\VignetteEngine{knitr::rmarkdown}
@@ -38,7 +39,11 @@ First, we need to find neuron names or neuron IDs for morphologies hosted on [ne
 
 To find these items, let us search the repository for neurons from the two groups of animal in which we are interested:
 
-```{r find.neurons}
+```{r find.neurons, eval = FALSE}
+# Load package
+library(neuromorphr)
+library(nat)
+
 # Hello neuromorpho.org, can you hear us?
 neuromorpho_is_api_healthy() # Check to see if we can talk to the neuromorpho API, otherwise we cannot continue
 
@@ -58,10 +63,10 @@ elephant.df = neuromorpho_search(search_terms="species:elephant")
 # But we probably cannot easily compare different cell types. Which types do we have?
 tw = table(whale.df$cell_type)
 message("whale cell types:")
-kable(tw)
+print(tw)
 te = table(elephant.df$cell_type)
 message("elephant cell types:")
-kable(te)
+print(te)
 
 # Let's take only the pyramidal cells
 whale.neuron_names = subset(whale.df, grepl("pyramidal",cell_type))$neuron_name
@@ -77,7 +82,7 @@ Sometimes reading neurons can take a while, because [neuromorpho.org](http://neu
 
 These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `bit.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
 
-```{r read.neurons}
+```{r read.neurons, eval = FALSE}
 # Read the whale neurons
 whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, bit.size = 10, nat = TRUE, progress = TRUE)
 
@@ -89,24 +94,39 @@ elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuro
 
 Let's plot these neocortical pyramidal cells. It is important to note that since neurons are reconstructed from many different neural systems and species, there is no 'standard' orientation. Instead, neuromorpho.org's standardisation process orients the morphologies by placing the soma in the origin of coordinates and aligning the first three principal components of all XYZ coordinates with heights, width, and depth. 
 
-```{r plot.neurons, fig.show='hold', fig.cap = "whale,elephant pyramidal neurons"}
+We can plot in 2D
+
+
+```{r plot.2d.neurons, fig.show='hold', fig.cap = "2D whale,elephant pyramidal neurons", eval = FALSE}
+nat::nopen3d()
+plot(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
+plot(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
+```
+
+And in 3D using `rgl`:
+
+```{r plot.3d.neurons, fig.cap = "3D whale,elephant pyramidal neurons", eval = FALSE}
 # Hold right click to pan
 nat::nopen3d()
 plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
 plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
-
 ```
 
 ## Of Mice and Whales
 
-So that's interesting. But what abotu a small mammal - like a mouse? Can we quickly do the same for this wee beastie?
+So that's interesting. But what about a small mammal - like a mouse? Can we quickly do the same for this wee beastie?
 
-```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons"}
+```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons", eval = FALSE}
 # Find
-mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neocortex")) # takes a while, there's a lot of mouse data to lok through!
+mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neocortex")) # takes a while, there's a lot of mouse data to look through!
 mouse.neuron_name = mouse.df$neuron_name[grepl("pyramidal",mouse.df$cell_type)]
+
 # Read
-mouse.pyramidal.cells = neuromorpho_read_neurons(neuron_name = mouse.neuron_name, bit.size = 10, nat = TRUE, progress = TRUE)
+mouse.pyramidal.cells = neuromorpho_read_neurons(neuron_name = mouse.neuron_name, batch.size = 25, nat = TRUE, progress = TRUE, find = FALSE)
+## warnings? - sometimes a file is missing from the repository it seems, or can otherwise not be accessed, so we lost a few cells ...
+## In fact, the file names on neuromorpho are not entirely consistent with one another. You can try using find = TRUE, which will
+## mean that this function runs slower, but scrapes the webpages for the correct dowbnload URL, which may slightly improve neuron retrieval 
+
 # Plot
 nat::nopen3d()
 plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
@@ -114,3 +134,30 @@ plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c(
 plot3d(mouse.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("darkolivegreen1","darkolivegreen4"))(length(mouse.pyramidal.cells)))
 
 ```
+
+We can actually pull some of their metrics and plot them, to see the quantitative differences
+
+```{r metric, fig.show='hold', fig.cap = "whale,elephant,mouse metrics", eval = FALSE}
+# Put names together
+metrics.neuron_name = c(whale.pyramidal.cells[,"neuron_name"], elephant.pyramidal.cells[,"neuron_name"], mouse.pyramidal.cells[,"neuron_name"])
+
+# Pull measurements, in a data frame
+measurements = neuromorpho_morphometry(metrics.neuron_name, data_frame = TRUE)
+
+# Assign species column
+measurements$species = c(rep("whale", length(whale.pyramidal.cells)), rep("elephant", length(elephant.pyramidal.cells)), rep("mouse", length(mouse.pyramidal.cells)))
+
+# Boxlot volume
+boxplot(as.numeric(volume)~species, data=measurements, notch=FALSE, 
+  col=(c("deepskyblue1","firebrick1","darkolivegreen1")),
+  main="pyramidal neuron volumes", xlab="species")
+
+# Boxlot length
+boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
+  col=(c("deepskyblue1","firebrick1","darkolivegreen1")),
+  main="pyramidal neuron length", xlab="species")
+```
+
+So, it seems that whale neurons are a lot more voluminous than an elephant's, but less so in terms of cable length. Both are quite a lot larger than those of a mouse.
+
+Of course, to be sure, we would need to control by reconstruction method and work harder to establish the exact cell type correspondences.

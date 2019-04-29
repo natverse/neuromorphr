@@ -3,29 +3,47 @@
 \name{neuromorpho_names_from_ids}
 \alias{neuromorpho_names_from_ids}
 \alias{neuromorpho_ids_from_names}
+\alias{neuromorpho_field_entries_from_names}
 \title{Convert neuromorpho neuron IDs into neuron names, and vica versa}
 \usage{
-neuromorpho_names_from_ids(neuron_id, progress = TRUE,
+neuromorpho_names_from_ids(neuron_id, progress = TRUE, batch.size = 10,
   neuromorpho_url = "http://neuromorpho.org", ...)
 
 neuromorpho_ids_from_names(neuron_name, progress = TRUE,
-  neuromorpho_url = "http://neuromorpho.org", ...)
+  batch.size = 10, neuromorpho_url = "http://neuromorpho.org", ...)
+
+neuromorpho_field_entries_from_names(neuron_name, progress = TRUE,
+  batch.size = 10, neuromorpho_url = "http://neuromorpho.org",
+  field = "archive", ...)
 }
 \arguments{
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.}
 
+\item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
+The bar progresses when each batch is completed.
+If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
+
+\item{batch.size}{the number of requests sent at once to the neuromorpho.org, using \code{\link[curl]{multi_run}}. 
+Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
+Increasing the value of \code{batch.size} may reduce read time.}
+
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
+
+\item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
+can be found by searching the repository, for example via \code{neuromorpho_search}}
+
+\item{field}{another field for neurons' metadata, i.e. one of the fields as returned by \code{neuromorpho_fields}}
 }
 \value{
-a vector of neuron names / IDs, corresponding to the given neuron IDs / names
+a vector of field entries corresponding to the given neuron IDs / names
 }
 \description{
 Every neuron in the neuromorpho repository has its own unique neuron ID, starting at 1,
-and name. This function maps neuron IDs onto neuron names. Both can be used to read neurons from the repository, using
-\code{neuromorpho_read_neurons}.
+and name. This can be mapped to a neuron name (also unique), or another (non-unique) neuron field entry. 
+Names and IDs can be used to read neurons from neuromorpho.org, via \code{neuromorpho_read_neurons}.
 }
 \details{
 retrieves the meta data associated with a neuron ID / neuron name, in order to find its corresponding name / ID. 

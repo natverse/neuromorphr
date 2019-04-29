@@ -9,6 +9,9 @@ neuromorpho_morphometry(neuron_name = NULL, neuron_id = NULL,
   neuromorpho_url = "http://neuromorpho.org", progress = TRUE, ...)
 }
 \arguments{
+\item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
+can be found by searching the repository, for example via \code{neuromorpho_search}}
+
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.}
 
@@ -21,7 +24,11 @@ a nested list (dictionary-like) has been returned for a neuron, this option will
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
+The bar progresses when each batch is completed.
+If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
+
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 a list of measurements for a neuron, or a list of lists if neuron_name/neuron_id is a vector with more than one element
@@ -67,8 +74,22 @@ neurmorpho.org calculates some basic measures for neuronal skeleton reconstructi
  Note that each of these parameters is extracted from the whole neuron (axon plus dendrites).
 }
 \examples{
-# Let's get those measurements
-neuron.measures = neuromorpho_morphometry()
+# Let's get some measurements for the
+
+# let's get neocortical neurons from both the African elephant and the humpback whale
+big.neocortex.df = neuromorpho_search(search_terms= c("species:elephant,humpback whale",
+                                                      "brain_region:neocortex"))
+
+## Pull measurements, in a data frame
+measurements = neuromorpho_morphometry(big.neocortex.df$neuron_name, data_frame = TRUE)
+
+## Assign species column
+measurements$species = big.neocortex.df[rownames(measurements),"species"]
+
+## Boxlot
+boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
+     col=(c("deepskyblue1","firebrick1")),
+     main="neocortical neuron volumes", xlab="species")
 
 }
 \seealso{

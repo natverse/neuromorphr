@@ -12,7 +12,7 @@ neuromorpho_literature_field_counts(field = "tracingSystem",
 
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \description{
 Returns a vector of counts for every field entry for a given neuromorpho literature field.

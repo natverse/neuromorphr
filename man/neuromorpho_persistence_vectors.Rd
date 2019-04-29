@@ -5,9 +5,13 @@
 \title{Return persistence vectors for queried neurons}
 \usage{
 neuromorpho_persistence_vectors(neuron_name = NULL, neuron_id = NULL,
-  batch.size = 10, neuromorpho_url = "http://neuromorpho.org", ...)
+  batch.size = 10, progress = TRUE,
+  neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
+\item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 
+can be found by searching the repository, for example via \code{neuromorpho_search}}
+
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
 this supersedes \code{neuron_id}, which is then treated as if its value were \code{NULL}.}
 
@@ -15,9 +19,13 @@ this supersedes \code{neuron_id}, which is then treated as if its value were \co
 Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
 Increasing the value of \code{batch.size} may reduce read time.}
 
+\item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
+The bar progresses when each batch is completed.
+If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
+
 \item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
 
-\item{...}{methods passed to \code{\link{neuromorpho_fetch}}}
+\item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
 a list of measurements for a neuron, or a list of lists if neuron_name/neuron_id is a vector with more than one element
@@ -67,11 +75,6 @@ For each neuron, the following is returned:
   \item distance
   \item coefficients
 }
-}
-\examples{
-# Let's get those measurements
-neuron.measures = neuromorpho_morphometry()
-
 }
 \seealso{
 \code{\link{neuromorpho_morphometry}},

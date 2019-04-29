@@ -5,7 +5,7 @@
 #' @inheritParams neuromorpho_read_neurons
 #' @details All the data fields can be seen and explored on neuromorpho.org
 #' at \url{http://neuromorpho.org/MetaData.jsp}. 
-#' @seealso \code{\link{neuromorpho_neuron_info}}, 
+#' @seealso \code{\link{neuromorpho_neurons_info}}, 
 #' \code{\link{neuromorpho_read_neurons}}, 
 #' \code{\link{neuromorpho_field_entries}}
 #' @export
@@ -26,7 +26,7 @@ neuromorpho_fields <- function(neuromorpho_url = "http://neuromorpho.org",
 #' @param field a valid neuron field, as returned by \code{neuromorpho_fields}
 #' @details All the data fields, and their entries, can be seen and explored on neuromorpho.org
 #' at \url{http://neuromorpho.org/MetaData.jsp}. 
-#' @seealso \code{\link{neuromorpho_neuron_info}}, 
+#' @seealso \code{\link{neuromorpho_neurons_info}}, 
 #' \code{\link{neuromorpho_read_neurons}},
 #' \code{\link{neuromorpho_fields}}
 #' @export
@@ -96,6 +96,8 @@ neuromorpho_search <- function(search_terms = c("archive:Jacobs", "species:eleph
       df = rbind(df, neuromorpho_unpack_search(resp))
     }
   }
+  df = df[!duplicated(df$neuron_name),]
+  rownames(df) = df$neuron_name
   df
 }
 
