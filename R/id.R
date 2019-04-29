@@ -1,4 +1,4 @@
-#' @title Convert neuromorpho neuron IDs into neuron names, and vica versa
+#' @title Convert neuromorpho neuron IDs into neuron names, or other information, and vica versa
 #'
 #' @description Every neuron in the neuromorpho repository has its own unique neuron ID, starting at 1,
 #' and name. This can be mapped to a neuron name (also unique), or another (non-unique) neuron field entry. 

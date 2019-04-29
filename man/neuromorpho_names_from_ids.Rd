@@ -5,7 +5,7 @@
 \alias{neuromorpho_ids_from_names}
 \alias{neuromorpho_field_entries_from_names}
 \alias{neuromorpho_articles_from_neurons}
-\title{Convert neuromorpho neuron IDs into neuron names, and vica versa}
+\title{Convert neuromorpho neuron IDs into neuron names, or other information, and vica versa}
 \usage{
 neuromorpho_names_from_ids(neuron_id, progress = TRUE, batch.size = 10,
   neuromorpho_url = "http://neuromorpho.org", ...)

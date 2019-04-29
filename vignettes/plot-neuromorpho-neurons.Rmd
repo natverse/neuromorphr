@@ -11,7 +11,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = TRUE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -39,7 +39,7 @@ First, we need to find neuron names or neuron IDs for morphologies hosted on [ne
 
 To find these items, let us search the repository for neurons from the two groups of animal in which we are interested:
 
-```{r find.neurons, eval = TRUE}
+```{r find.neurons, eval = FALSE}
 # Load package
 library(neuromorphr)
 library(nat)
@@ -82,7 +82,7 @@ Sometimes reading neurons can take a while, because [neuromorpho.org](http://neu
 
 These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `batch.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
 
-```{r read.neurons, eval = TRUE}
+```{r read.neurons, eval = FALSE}
 # Read the whale neurons
 whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, batch.size = 10, nat = TRUE, progress = TRUE)
 
@@ -97,7 +97,7 @@ Let's plot these neocortical pyramidal cells. It is important to note that since
 We can plot in 2D
 
 
-```{r plot.2d.neurons, fig.show='hold', fig.cap = "2D whale,elephant pyramidal neurons", eval = TRUE}
+```{r plot.2d.neurons, fig.show='hold', fig.cap = "2D whale,elephant pyramidal neurons", eval = FALSE}
 nat::nopen3d()
 plot(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
 plot(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
@@ -105,7 +105,7 @@ plot(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("f
 
 And in 3D using `rgl`:
 
-```{r plot.3d.neurons, fig.cap = "3D whale,elephant pyramidal neurons", eval = TRUE}
+```{r plot.3d.neurons, fig.cap = "3D whale,elephant pyramidal neurons", eval = FALSE}
 # Hold right click to pan
 nat::nopen3d()
 plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
@@ -116,7 +116,7 @@ plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c(
 
 So that's interesting. But what about a small mammal - like a mouse? Can we quickly do the same for this wee beastie?
 
-```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons", eval = TRUE}
+```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons", eval = FALSE}
 # Find
 mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neocortex")) # takes a while, there's a lot of mouse data to look through!
 mouse.neuron_name = mouse.df$neuron_name[grepl("pyramidal",mouse.df$cell_type)]
@@ -137,7 +137,7 @@ plot3d(mouse.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("da
 
 We can actually pull some of their metrics and plot them, to see the quantitative differences
 
-```{r metric, fig.show='hold', fig.cap = "whale,elephant,mouse metrics", eval = TRUE}
+```{r metric, fig.show='hold', fig.cap = "whale,elephant,mouse metrics", eval = FALSE}
 # Put names together
 metrics.neuron_name = c(whale.pyramidal.cells[,"neuron_name"], elephant.pyramidal.cells[,"neuron_name"], mouse.pyramidal.cells[,"neuron_name"])
 
@@ -147,12 +147,12 @@ measurements = neuromorpho_morphometry(metrics.neuron_name, data_frame = TRUE)
 # Assign species column
 measurements$species = c(rep("whale", length(whale.pyramidal.cells)), rep("elephant", length(elephant.pyramidal.cells)), rep("mouse", length(mouse.pyramidal.cells)))
 
-# Boxlot volume
+# Boxplot volume
 boxplot(as.numeric(volume)~species, data=measurements, notch=FALSE, 
   col=(c("deepskyblue1","firebrick1","darkolivegreen1")),
   main="pyramidal neuron volumes", xlab="species")
 
-# Boxlot length
+# Boxplot length
 boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
   col=(c("deepskyblue1","firebrick1","darkolivegreen1")),
   main="pyramidal neuron length", xlab="species")

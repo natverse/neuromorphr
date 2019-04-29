@@ -4,7 +4,7 @@
 neuromorphr
 ===========
 
-The goal of *neuromorphr* is to provide R client utilities for interacting with the [API](http://neuromorpho.org/api.jsp) for [neuromorpho.org](http://neuromorpho.org), which is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many [here]()). To date, [neuromorpho.org](http://neuromorpho.org) is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with veriosn 7.7 of [neuromorpho.org](http://neuromorpho.org). In the following, we detail some of its functionality, and copy and paste some text from [neuromorpho.org](http://neuromorpho.org) in order to fill you in on its database and outlook. If python is more your poison, there are a few python client available, for example from [BonsaiNet](https://github.com/BonsaiNet/Neuromorpho.org). Using this R package in concert with the [nat](https://github.com/jefferis/nat) ecosystem developed primarily by Greg Jefferis is highly recommended. The curators of [neuromorpho.org](http://neuromorpho.org) can be contacted at *<nmadmin@gmu.edu>*.
+The goal of *neuromorphr* is to provide R client utilities for interacting with the [API](http://neuromorpho.org/api.jsp) for [neuromorpho.org](http://neuromorpho.org), which is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many [here](http://neuromorpho.org/acknowl.jsp)). To date, [neuromorpho.org](http://neuromorpho.org) is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with veriosn 7.7 of [neuromorpho.org](http://neuromorpho.org). In the following, we detail some of its functionality, and copy and paste some text from [neuromorpho.org](http://neuromorpho.org) in order to fill you in on its database and outlook. If python is more your poison, there are a few python client available, for example from [BonsaiNet](https://github.com/BonsaiNet/Neuromorpho.org). Using this R package in concert with the [nat](https://github.com/jefferis/nat) ecosystem developed primarily by Greg Jefferis is highly recommended. The curators of [neuromorpho.org](http://neuromorpho.org) can be contacted at *<nmadmin@gmu.edu>*.
 
 Installation
 ------------
@@ -63,12 +63,12 @@ measurements = neuromorpho_morphometry(neocortex.df$neuron_name, batch.size = 10
 ## Assign species column
 measurements$species = neocortex.df[rownames(measurements),"species"]
  
-## Boxlot, neuron length
+## Boxplot, neuron length
 boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
       col=(c("deepskyblue1","firebrick1", "darkolivegreen1")),
       main="neocortical neuron lengths", xlab="species")
  
-## Boxlot, neuron volume
+## Boxplot, neuron volume
 boxplot(as.numeric(volume)~species, data=measurements, notch=FALSE, 
       col=(c("deepskyblue1","firebrick1", "darkolivegreen1")),
       main="neocortical neuron volumes", xlab="species")
@@ -93,7 +93,7 @@ Feed the beast.
 Acknowledging the data and tools
 --------------------------------
 
-The [neuromorpho.org](http://neuromorpho.org) has a [terms of use](http://neuromorpho.org/useterm.jsp), which proviides guidance on how best to credit This package was created by Alexander Bates, while in the hroup of Gregory Jefferis. You can cite this package as:
+The [neuromorpho.org](http://neuromorpho.org) has a [terms of use](http://neuromorpho.org/useterm.jsp), which proviides guidance on how best to credit This package was created by Alexander Bates, while in the group of [Dr. Gregory Jefferis](https://en.wikipedia.org/wiki/Gregory_Jefferis). You can cite this package as:
 
 ``` r
 citation(package = "neuromorphr")

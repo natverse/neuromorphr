@@ -86,10 +86,10 @@ measurements = neuromorpho_morphometry(big.neocortex.df$neuron_name, data_frame 
 ## Assign species column
 measurements$species = big.neocortex.df[rownames(measurements),"species"]
 
-## Boxlot
+## Boxplot
 boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
      col=(c("deepskyblue1","firebrick1")),
-     main="neocortical neuron volumes", xlab="species")
+     main="neocortical neuron lengths", xlab="species")
 
 }
 \seealso{
