@@ -60,7 +60,7 @@
 #' ## Boxlot
 #' boxplot(as.numeric(length)~species, data=measurements, notch=FALSE, 
 #'      col=(c("deepskyblue1","firebrick1")),
-#'      main="neocortical neuron volumes", xlab="species")
+#'      main="neocortical neuron lengths", xlab="species")
 #' 
 #' @export
 #' @rdname neuromorpho_morphometry
@@ -82,7 +82,9 @@ neuromorpho_morphometry <- function(neuron_name = NULL,
   }
   res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, progress = progress, message = "pulling neuromorpho measurements", ...)
   names(res) = neuron_name
-  res = lapply(res, nullToNA)
+  retreived = !unlist(sapply(res, is.null))
+  res = res[retreived]
+  res = nullToNA(res)
   if(data_frame){
     res = do.call(rbind,res)
     res = as.data.frame(res)
@@ -155,10 +157,12 @@ neuromorpho_persistence_vectors <- function(neuron_name = NULL,
   }else if(is.null(neuron_name)){
     neuron_id = neuromorpho_ids_from_names(neuron_name = neuron_name, 
                                            neuromorpho_url = neuromorpho_url, 
-                                           progress = FALSE, message = "obtaining persistence vectors", ...)
+                                           progress = FALSE, ...)
   }
   paths = paste0(neuromorpho_url, "/api/pvec/id/", neuron_id)
-  res = neuromorpho_async_req(urls = paths, FUN = NULL, batch.size = batch.size, progress = progress, ...)
+  res = neuromorpho_async_req(urls = paths, FUN = NULL, 
+                              batch.size = batch.size, progress = progress,
+                              message = "obtaining persistence vectors", ...)
   res = res[!is.na(res)]
   res
 }

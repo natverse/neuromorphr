@@ -39,7 +39,7 @@ First, we need to find neuron names or neuron IDs for morphologies hosted on [ne
 
 To find these items, let us search the repository for neurons from the two groups of animal in which we are interested:
 
-```{r find.neurons, eval = FALSE}
+```{r find.neurons, eval = TRUE}
 # Load package
 library(neuromorphr)
 library(nat)
@@ -80,14 +80,14 @@ Armed with this information, we can now read the neurons as `nat` package `neuro
 
 Sometimes reading neurons can take a while, because [neuromorpho.org](http://neuromorpho.org) is fairly slow. We'll want to have `progress = TRUE` on in the following functions, so that we get a sense for how long it's taking.
 
-These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `bit.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
+These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `batch.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
 
-```{r read.neurons, eval = FALSE}
+```{r read.neurons, eval = TRUE}
 # Read the whale neurons
-whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, bit.size = 10, nat = TRUE, progress = TRUE)
+whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, batch.size = 10, nat = TRUE, progress = TRUE)
 
 # And read the elephant neurons
-elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuron_names, bit.size = 10, nat = TRUE, progress = TRUE)
+elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuron_names, batch.size = 10, nat = TRUE, progress = TRUE)
 ```
 
 ## Plot neurons
@@ -97,7 +97,7 @@ Let's plot these neocortical pyramidal cells. It is important to note that since
 We can plot in 2D
 
 
-```{r plot.2d.neurons, fig.show='hold', fig.cap = "2D whale,elephant pyramidal neurons", eval = FALSE}
+```{r plot.2d.neurons, fig.show='hold', fig.cap = "2D whale,elephant pyramidal neurons", eval = TRUE}
 nat::nopen3d()
 plot(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
 plot(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("firebrick1","firebrick4"))(length(elephant.pyramidal.cells)))
@@ -105,7 +105,7 @@ plot(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("f
 
 And in 3D using `rgl`:
 
-```{r plot.3d.neurons, fig.cap = "3D whale,elephant pyramidal neurons", eval = FALSE}
+```{r plot.3d.neurons, fig.cap = "3D whale,elephant pyramidal neurons", eval = TRUE}
 # Hold right click to pan
 nat::nopen3d()
 plot3d(whale.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("deepskyblue1","deepskyblue4"))(length(whale.pyramidal.cells)))
@@ -116,7 +116,7 @@ plot3d(elephant.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c(
 
 So that's interesting. But what about a small mammal - like a mouse? Can we quickly do the same for this wee beastie?
 
-```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons", eval = FALSE}
+```{r mouse, fig.show='hold', fig.cap = "whale,elephant,mouse pyramidal neurons", eval = TRUE}
 # Find
 mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neocortex")) # takes a while, there's a lot of mouse data to look through!
 mouse.neuron_name = mouse.df$neuron_name[grepl("pyramidal",mouse.df$cell_type)]
@@ -137,7 +137,7 @@ plot3d(mouse.pyramidal.cells, lwd = 2, soma = TRUE, col = colorRampPalette(c("da
 
 We can actually pull some of their metrics and plot them, to see the quantitative differences
 
-```{r metric, fig.show='hold', fig.cap = "whale,elephant,mouse metrics", eval = FALSE}
+```{r metric, fig.show='hold', fig.cap = "whale,elephant,mouse metrics", eval = TRUE}
 # Put names together
 metrics.neuron_name = c(whale.pyramidal.cells[,"neuron_name"], elephant.pyramidal.cells[,"neuron_name"], mouse.pyramidal.cells[,"neuron_name"])
 

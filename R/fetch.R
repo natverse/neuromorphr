@@ -143,7 +143,8 @@ neuromorpho_parse_json <- function (req, simplifyVector = FALSE, raw = TRUE, ...
     text <- httr::content(req, as = "text", encoding = "UTF-8")
   }
   if (identical(text, "")){
-    stop("No output to parse", call. = FALSE) 
+    warning("No output to parse", call. = FALSE)
+    return(NULL)
   }
   p = tryCatch(jsonlite::fromJSON(text, simplifyVector = simplifyVector, ...), error = function(e) NULL)
   if(is.null(p)){
