@@ -22,7 +22,8 @@ E.g. you can find out how the number of papers that used particula neuron recosn
 Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}.
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_literature_field_entries}},
+Other literature functions: \code{\link{neuromorpho_get_article}},
+  \code{\link{neuromorpho_literature_field_entries}},
   \code{\link{neuromorpho_literature_fields}},
   \code{\link{neuromorpho_literature_search}}
 }

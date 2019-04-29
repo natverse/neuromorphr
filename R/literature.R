@@ -158,15 +158,41 @@ neuromorpho_literature_field_counts <- function(field = "tracingSystem",
   sort(fields.num, decreasing = TRUE)
 }
 
-
-# hidden
+#' @title Get information on an article by querying an article ID
+#'
+#' @description Returns a data frame describing an article; article_ids can be obtained using \code{neuromorpho_articles_from_neurons}
+#' @inheritParams neuromorpho_field_entries
+#' @inheritParams neuromorpho_read_neurons
+#' @param article_id a unique neuromorpho article ID, number in the repository start from 1.
+#' article_ids can be obtained using \code{neuromorpho_articles_from_neurons}
+#' @details Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}. 
+#' @family literature functions
+#' @export
+#' @rdname neuromorpho_get_article
 neuromorpho_get_article <- function(article_id,
-                                    neuromorpho_url = "http://neuromorpho.org", 
+                                    batch.size = 10,
+                                    neuromorpho_url = "http://neuromorpho.org",
+                                    progress = TRUE,
                                     ...){
+  paths = paste0(neuromorpho_url, "/api/literature/id/", article_id)
+  res = neuromorpho_async_req(urls = paths, FUN = neuromorpho_parse_json, batch.size = batch.size, 
+                              progress = progress, message = "reading neuromorpho metadata", ...)
   res = neuromorpho_fetch(path = paste0("api/literature/id/", article_id), neuromorpho_url = neuromorpho_url, ...)
-
+  names(res) = article_id
+  res = res[!is.na(res)]
+  l = list()
+  if(is.null(res)){
+    warning("no results found")
+    return(NULL)
+  }else{
+    for(i in 1:length(res)){
+      dfi = neuromorpho_process_literature(res[[i]])
+      l[[i]] = dfi
+    }
+    df = as.data.frame(do.call(rbind,l)) 
+  }
+  df
 }
-
 
 # hidden
 neuromorpho_process_literature <- function(res){
@@ -197,13 +223,13 @@ neuromorpho_process_literature <- function(res){
 neuromorpho_unpack_literature_search <- function(res){
   l = list()
   if(is.null(res$`_embedded`)){
-    warning("no reults found")
+    warning("no results found")
     return(NULL)
   }else{
     for(i in 1:length(res$`_embedded`$publicationResources)){
       dfi = neuromorpho_process_literature(res$`_embedded`$publicationResources[[i]])
       l[[i]] = dfi
     }
-    do.call(rbind,l) 
+    as.data.frame(do.call(rbind,l)) 
   }
 }

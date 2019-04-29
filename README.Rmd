@@ -43,13 +43,14 @@ neuromorpho_is_api_healthy()
 # But first I need neuron names and/or neuron IDs, how do I get those?
 ?neuprint_search()
 
-# I see, so what meat data do I get with my neurons?
+# I see, so what metadata do I get with my neurons?
+?neuprint_neurons_info()
+?neuprint_neurons_meta()
+
+# Interesting, I see a pubmed ID (pmid) is also given. Can I find the scientific artices that describe these neurons?
 ?neuprint_search()
 
-# Interesting, see a pubmed ID (pmid) is also given. Can I find the scientific artices that descrie these neurons?
-?neuprint_search()
-
-# I heard somethign about persistence vectors, they're used to describe describe meaningful morphological features? Can I get those?
+# I heard something about persistence vectors, they're used to describe describe meaningful morphological features? Can I get those?
 ?neuromorpho_persistence_vectors
 ```
 

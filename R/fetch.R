@@ -52,7 +52,7 @@ neuromorpho_is_api_healthy <- function(neuromorpho_url = "http://neuromorpho.org
 #' @return a list of data retrieved from the requests defined by \code{urls}, and processed by \code{FUN}
 #' @seealso  
 #' \code{\link{neuromorpho_read_neurons}}
-#' @examples
+#' @examples 
 #' \dontrun{ 
 #' # Let's just grab metadata for all neurons in neuromorpho
 #' all.species = neuromorpho_field_entries(field="species)

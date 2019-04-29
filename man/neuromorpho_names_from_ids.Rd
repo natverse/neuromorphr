@@ -4,6 +4,7 @@
 \alias{neuromorpho_names_from_ids}
 \alias{neuromorpho_ids_from_names}
 \alias{neuromorpho_field_entries_from_names}
+\alias{neuromorpho_articles_from_neurons}
 \title{Convert neuromorpho neuron IDs into neuron names, and vica versa}
 \usage{
 neuromorpho_names_from_ids(neuron_id, progress = TRUE, batch.size = 10,
@@ -15,6 +16,10 @@ neuromorpho_ids_from_names(neuron_name, progress = TRUE,
 neuromorpho_field_entries_from_names(neuron_name, progress = TRUE,
   batch.size = 10, neuromorpho_url = "http://neuromorpho.org",
   field = "archive", ...)
+
+neuromorpho_articles_from_neurons(neuron_name = NULL, neuron_id = NULL,
+  progress = TRUE, search.type = c("doi", "pmid"),
+  neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given
@@ -36,6 +41,9 @@ Increasing the value of \code{batch.size} may reduce read time.}
 can be found by searching the repository, for example via \code{neuromorpho_search}}
 
 \item{field}{another field for neurons' metadata, i.e. one of the fields as returned by \code{neuromorpho_fields}}
+
+\item{search.type}{search for a publication associated with a neuron, either by looking for a corresponding \code{doi} 
+or \code{pmid} (PubMed ID).}
 }
 \value{
 a vector of field entries corresponding to the given neuron IDs / names
@@ -57,6 +65,10 @@ neuron_names = neuromorpho_names_from_ids(c(1:10))
 
 # and see that we get the same IDs back if we search the other way
 neuron_ids = neuromorpho_ids_from_names(neuron_names)
+
+# now we can see the corresponding article IDs
+article_ids = neuromorpho_articles_from_neurons(neuron_names, search.type = "doi")
+
 }
 }
 \seealso{

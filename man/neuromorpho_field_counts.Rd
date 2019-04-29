@@ -23,6 +23,21 @@ All the data fields, and their entries, can be seen and explored on neuromorpho.
 at \url{http://neuromorpho.org/MetaData.jsp}. Coutns can be seen as pie charts under the 'browse'
 tab at \url{http://neuromorpho.org}, for example, \url{http://neuromorpho.org/byspecies.jsp}.
 }
+\examples{
+\dontrun{
+# Get counts for the number of neurons the repository has, by species
+species.count = neuromorpho_field_counts(field = "species")
+species.count.sorted = sort(species.count,decreasing=TRUE)
+species.count.top = c(species.count.top[1:7], 
+                      sum(species.count.sorted[8:length(species.count.sorted)]))
+names(species.count.top)[length(species.count.top)] = "other"
+
+# Plot
+pie(x=species.count.top, labels = names(species.count.top), 
+    main="neuron morphologies from different species")
+
+}
+}
 \seealso{
 \code{\link{neuromorpho_search}}, 
 \code{\link{neuromorpho_field_entries}},

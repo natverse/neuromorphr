@@ -36,7 +36,8 @@ print(neuron.fields)
 
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_literature_field_counts}},
+Other literature functions: \code{\link{neuromorpho_get_article}},
+  \code{\link{neuromorpho_literature_field_counts}},
   \code{\link{neuromorpho_literature_fields}},
   \code{\link{neuromorpho_literature_search}}
 }

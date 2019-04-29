@@ -113,6 +113,20 @@ neuromorpho_search <- function(search_terms = c("archive:Jacobs", "species:eleph
 #' @seealso \code{\link{neuromorpho_search}}, 
 #' \code{\link{neuromorpho_field_entries}},
 #' \code{\link{neuromorpho_fields}}
+#' @examples 
+#' \dontrun{
+#' # Get counts for the number of neurons the repository has, by species
+#' species.count = neuromorpho_field_counts(field = "species")
+#' species.count.sorted = sort(species.count,decreasing=TRUE)
+#' species.count.top = c(species.count.top[1:7], 
+#'                       sum(species.count.sorted[8:length(species.count.sorted)]))
+#' names(species.count.top)[length(species.count.top)] = "other"
+#' 
+#' # Plot
+#' pie(x=species.count.top, labels = names(species.count.top), 
+#'     main="neuron morphologies from different species")
+#' 
+#' }
 #' @export
 #' @rdname neuromorpho_field_counts
 neuromorpho_field_counts <- function(field = "species", 
