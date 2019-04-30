@@ -29,8 +29,8 @@ If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
 a list of data retrieved from the requests defined by \code{urls}, and processed by \code{FUN}
 }
 \description{
-Make batches of AJAX style concurrent requests. used to run multiple asynchronous tasks in parallel
-and wait for them all to complete before further processing.
+Make batches of AJAX style concurrent requests. Used to run multiple asynchronous tasks in parallel
+and wait for them all to complete before further batch-wise processing.
 }
 \details{
 Speed querying neuromorpho.org by making batches of AJAX style concurrent requests, 

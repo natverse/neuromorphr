@@ -4,7 +4,7 @@
 neuromorphr
 ===========
 
-The goal of *neuromorphr* is to provide R client utilities for interacting with the [API](http://neuromorpho.org/api.jsp) for [neuromorpho.org](http://neuromorpho.org), which is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many [here](http://neuromorpho.org/acknowl.jsp)). To date, [neuromorpho.org](http://neuromorpho.org) is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with veriosn 7.7 of [neuromorpho.org](http://neuromorpho.org). In the following, we detail some of its functionality, and copy and paste some text from [neuromorpho.org](http://neuromorpho.org) in order to fill you in on its database and outlook. If python is more your poison, there are a few python client available, for example from [BonsaiNet](https://github.com/BonsaiNet/Neuromorpho.org). Using this R package in concert with the [nat](https://github.com/jefferis/nat) ecosystem developed primarily by Greg Jefferis is highly recommended. The curators of [neuromorpho.org](http://neuromorpho.org) can be contacted at *<nmadmin@gmu.edu>*.
+The goal of *neuromorphr* is to provide R client utilities for interacting with the [API](http://neuromorpho.org/api.jsp) for [neuromorpho.org](http://neuromorpho.org), which is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many [here](http://neuromorpho.org/acknowl.jsp)). To date, [neuromorpho.org](http://neuromorpho.org) is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with veriosn 7.7 of [neuromorpho.org](http://neuromorpho.org). In the following, we detail some of its functionality, and copy and paste some text from [neuromorpho.org](http://neuromorpho.org) in order to fill you in on its database and outlook. If python is more your poison, there are a few python clients available, for example from [BonsaiNet](https://github.com/BonsaiNet/Neuromorpho.org). Using this R package in concert with the [nat](https://github.com/jefferis/nat) ecosystem developed primarily by [Gregory Jefferis](https://en.wikipedia.org/wiki/Gregory_Jefferis) is highly recommended. The curators of [neuromorpho.org](http://neuromorpho.org) can be contacted at *<nmadmin@gmu.edu>*.
 
 Installation
 ------------
@@ -79,6 +79,10 @@ pyramidal.cells = neuromorpho_read_neurons(neuron_name = neocortex.df$neuron_nam
 ## Plot 3D
 plot3d(pyramidal.cells, col = as.factor(species))
 ```
+
+Here's a subset. In red, elephant, and in blue, whale, cortical pyramidal neurons:
+
+![elephant,whale,mouse neurons](https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png)
 
 Submit to neuromorpho.org
 -------------------------
