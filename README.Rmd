@@ -93,7 +93,7 @@ plot3d(pyramidal.cells, col = as.factor(species))
 
 Here's a subset. In red, elephant, and in blue, whale, cortical pyramidal neurons:
 
-![elephant,whale,mouse neurons](https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png)
+![3dneurons](https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png)
 
 ## Submit to neuromorpho.org
 
