@@ -16,7 +16,7 @@ Only meta data for neurons that have the entries described for all given search 
 To find neurons that are in either of two field entries, one can use, for example, \code{"species:rat,mouse"} to return 
 all rat or mouse neurons.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }

@@ -23,15 +23,15 @@ Increasing the value of \code{batch.size} may reduce read time.}
 The bar progresses when each batch is completed.
 If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \value{
-a list containg all the meta data for a neuron stored on neuromorpho.org
+a list containing all the meta data for a neuron stored on neuromorpho.org
 }
 \description{
-Retrieve the meta data assoicated with query neurons. Neurons can be queried using either their
+Retrieve the meta data associated with query neurons. Neurons can be queried using either their
 neuron ID or their name.
 }
 \details{
@@ -44,7 +44,7 @@ and generally include:
   \item Brain region at three levels: main region/structure, sub-region, detailed sub-region (example: Hippocampus, dentate gyrus, granule cell layer)
   \item Neuron type at three levels: main neuron class type, sub-class, detailed sub-class (example: Interneuron, basket cell, nested)
   \item Reconstruction method
-  \item Format of original data, though currently this package only retreives the data as standardised by neuromorpho.org
+  \item Format of original data, though currently this package only retrieves the data as standardised by neuromorpho.org
 }
 }
 \examples{

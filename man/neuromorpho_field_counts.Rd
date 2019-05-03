@@ -10,7 +10,7 @@ neuromorpho_field_counts(field = "species",
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
@@ -20,7 +20,7 @@ E.g. you can find out how many neurons there are in the neuromorpho.org reposito
 }
 \details{
 All the data fields, and their entries, can be seen and explored on neuromorpho.org
-at \url{http://neuromorpho.org/MetaData.jsp}. Coutns can be seen as pie charts under the 'browse'
+at \url{http://neuromorpho.org/MetaData.jsp}. Counts can be seen as pie charts under the 'browse'
 tab at \url{http://neuromorpho.org}, for example, \url{http://neuromorpho.org/byspecies.jsp}.
 }
 \examples{

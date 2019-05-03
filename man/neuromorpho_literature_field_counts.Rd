@@ -10,13 +10,13 @@ neuromorpho_literature_field_counts(field = "tracingSystem",
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \description{
 Returns a vector of counts for every field entry for a given neuromorpho literature field.
-E.g. you can find out how the number of papers that used particula neuron recosntruction softwares.
+E.g. you can find out how the number of papers that used particular neuron reconstruction softwares.
 }
 \details{
 Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}.

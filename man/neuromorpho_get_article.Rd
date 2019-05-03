@@ -15,7 +15,7 @@ article_ids can be obtained using \code{neuromorpho_articles_from_neurons}}
 Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
 Increasing the value of \code{batch.size} may reduce read time.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
 The bar progresses when each batch is completed.

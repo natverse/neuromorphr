@@ -22,7 +22,7 @@ Increasing the value of \code{batch.size} may reduce read time.}
 \item{data_frame}{if \code{TRUE}, a \code{data.frame} object is returned, rather than a \code{list} object, with the same information. If 
 a nested list (dictionary-like) has been returned for a neuron, this option will result in some data loss.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown. 
 The bar progresses when each batch is completed.
@@ -38,18 +38,18 @@ For each neuron corresponding to a given neuron name or neuron ID, return a list
 stored on neuromorpho.org. See details for the sort of measurements you can get.
 }
 \details{
-neurmorpho.org calculates some basic measures for neuronal skeleton reconstructions. Distances are given in μm, and angles in °. Typical measures:
+neurmorpho.org calculates some basic measures for neuronal skeleton reconstructions. Distances are given in micrometers, and angles in °. Typical measures:
 #' \itemize{
   \item neuron_name
   \item neuron_id
-  \item surface (μm^2) -- Total arborisation surface area
-  \item volume (μm^3) -- Total internal volume of the arborisation
+  \item surface (micrometers^2) -- Total arborisation surface area
+  \item volume (micrometers^3) -- Total internal volume of the arborisation
   \item n_branch -- Total number of branches
-  \item width  (μm) -- Neuronal width (95% of second principal component)
-  \item height (μm) -- Neuronal height (95% of first principal component)
-  \item depth (μm) -- Neuronal depth (95% of third principal component)
-  \item diameter (μm) -- Average branch diameter
-  \item eucDistance (μm) -- Maximum Euclidean (straight) distance from soma to tips
+  \item width  (micrometers) -- Neuronal width (95% of second principal component)
+  \item height (micrometers) -- Neuronal height (95% of first principal component)
+  \item depth (micrometers) -- Neuronal depth (95% of third principal component)
+  \item diameter (micrometers) -- Average branch diameter
+  \item eucDistance (micrometers) -- Maximum Euclidean (straight) distance from soma to tips
   \item pathDistance -- Maximum Path (along the tree) distance from soma to tips
   \item branch_Order -- Maximum Branch order (number of bifurcations from soma to tips)
   \item contraction -- Average Contraction (the ratio between Euclidean and path length calculated on each branch)
@@ -59,11 +59,11 @@ neurmorpho.org calculates some basic measures for neuronal skeleton reconstructi
   \item pk_classic
   \item bif_ampl_local
   \item fractal_Dim
-  \item soma_Surface (μm^2) -- Soma surface area
+  \item soma_Surface (micrometers^2) -- Soma surface area
   \item n_stems -- Total number of branches (bifurcations plus terminations)
   \item n_bifs -- Total number of bifurcations
   \item bif_ampl_remote
-  \item length (μm) -- Total arborisation length
+  \item length (micrometers) -- Total arborisation length
   \item Local Bifurcation angle (average over all bifurcations of the angle between the first two daughter compartments)
   \item Remote Bifurcation angle (average over all bifurcations of the angle between the following bifurcations or tips)
 }

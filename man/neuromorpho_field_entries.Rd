@@ -2,7 +2,7 @@
 % Please edit documentation in R/search.R
 \name{neuromorpho_field_entries}
 \alias{neuromorpho_field_entries}
-\title{Return the available meta data entires for neuromorpho neuron fields}
+\title{Return the available meta data entries for neuromorpho neuron fields}
 \usage{
 neuromorpho_field_entries(field = "species",
   neuromorpho_url = "http://neuromorpho.org", ...)
@@ -10,7 +10,7 @@ neuromorpho_field_entries(field = "species",
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }

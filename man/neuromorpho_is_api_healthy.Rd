@@ -8,7 +8,7 @@ neuromorpho_is_api_healthy(neuromorpho_url = "http://neuromorpho.org",
   ...)
 }
 \arguments{
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
@@ -19,7 +19,7 @@ TRUE if the API can be reached, FALSE with a warning, if not
 Test that the base neuromorpho.org API url, \url{http://neuromorpho.org/api}, can be reached. 
 The API provides access to the neuron information, 
 morphometry data and literature via three main endpoints 
-using conventional HTTP requests. Tehse endpoints are used by function in this package
+using conventional HTTP requests. These endpoints are used by function in this package
 to read neurons from the repository, get meat information associated with those neurons, and 
 perform limited searches of the literature describing neuronal morphologies.
 }

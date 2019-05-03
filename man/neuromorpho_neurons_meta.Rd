@@ -29,7 +29,7 @@ If \code{TRUE}, or \code{100}, the bar completes where all batches are done.}
 Requests are sent to neuromorpho.org in parallel to speed up the process of reading neurons. Batches of queries are processed serially.
 Increasing the value of \code{batch.size} may reduce read time.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
@@ -37,7 +37,7 @@ Increasing the value of \code{batch.size} may reduce read time.}
 a data frame, with one entry per neuron queried
 }
 \description{
-Retrieve some the meta data assoicated with query neurons, in a compact way. Neurons can be queried using either their
+Retrieve some the meta data associated with query neurons, in a compact way. Neurons can be queried using either their
 neuron ID or their name.
 }
 \details{
@@ -45,7 +45,7 @@ The meta data for reconstructions has been extracted by neuromorpho.org from cor
 Some of these neuron fields will have multiple entries, 
 for example there might be multiple designations for a cell type, or brain region, 
 or multiple labs count be credited for a neuron's reconstruction. 
-This function returns the majority of the information stored on neuromorpho.org for a given setof neurons, 
+This function returns the majority of the information stored on neuromorpho.org for a given set of neurons, 
 but collapses some field entries into one field entry, so we can use a simpler data structure (a data.frame) to represent 
 this information, rather than a list. This is useful for adding to \code{neuronlist} objects as an attribute, as is standard in 
 \code{nat} family packages. If \code{light = TRUE}, then only the following information is returned in the final data frame:

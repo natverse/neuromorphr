@@ -14,15 +14,15 @@ All valid neuron fields can be seen by calling \code{neuromorpho_fields}, and al
 can be seen using \code{neuromorpho_fields_entries}. 
 Only meta data for neurons that have the entries described for all given search terms will be returned.}
 
-\item{neuromorpho_url}{the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}}
+\item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
 
 \item{...}{methods passed to \code{neuromorpho_async_req}, or in some cases, \code{neuromorphr:::neuromorpho_fetch}}
 }
 \description{
 Search for literature in the neuromorpho.org repository. The returned 
 data frame can  be used to get article IDs and neuron names, that can be fed to \code{neuromorpho_get_article}, 
-in order to get ifnormation on studies that have submitted reconstructions to neuromorpho.org. 
-Searches are made by looking at the meta data for items of literature in the repositroy, 
+in order to get information on studies that have submitted reconstructions to neuromorpho.org. 
+Searches are made by looking at the meta data for items of literature in the repository, 
 i.e. querying for certain field entries for certain literature fields.
 }
 \details{
