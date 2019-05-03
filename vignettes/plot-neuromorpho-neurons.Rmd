@@ -80,7 +80,7 @@ Armed with this information, we can now read the neurons as `nat` package `neuro
 
 Sometimes reading neurons can take a while, because [neuromorpho.org](http://neuromorpho.org) is fairly slow. We'll want to have `progress = TRUE` on in the following functions, so that we get a sense for how long it's taking.
 
-These fucntions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `batch.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
+These functions send asynchronous requests to the [neuromorpho.org](http://neuromorpho.org) API in parallel in order to speed things up. In one run, `batch.size` requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or [neuromorpho.org](http://neuromorpho.org) will fail for capacity reasons.
 
 ```{r read.neurons, eval = FALSE}
 # Read the whale neurons

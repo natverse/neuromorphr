@@ -23,7 +23,7 @@
 #' @param find if TRUE, then we scrape each neuron's webpage to find the correct link to download its SWC file. This is more stable, but more time consuming, 
 #' than setting \code{find = FALSE} and using the standard neuromorpho.org format for the download link. If the database changes, or you cannot find your neuron 
 #' even though you know it exists, try setting \code{find = TRUE}
-#' @param neuromorpho_url the base URL for querying the neuromorpho databse, defaults to \url{http://neuromorpho.org}
+#' @param neuromorpho_url the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}
 #' @param progress if \code{TRUE} or a numeric value, a progress bar is shown. 
 #' The bar progresses when each batch is completed.
 #' If \code{TRUE}, or \code{100}, the bar completes where all batches are done.

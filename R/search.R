@@ -18,7 +18,7 @@ neuromorpho_fields <- function(neuromorpho_url = "http://neuromorpho.org",
   res
 }
 
-#' @title Return the available meta data entires for neuromorpho neuron fields
+#' @title Return the available meta data entries for neuromorpho neuron fields
 #'
 #' @description Returns a list of values present in the repository for the neuron field requested.
 #' These values can be used in the search criteria section of the custom queries.
@@ -108,7 +108,7 @@ neuromorpho_search <- function(search_terms = c("archive:Jacobs", "species:eleph
 #' @inheritParams neuromorpho_field_entries
 #' @param field a valid neuron field, as returned by \code{neuromorpho_fields}
 #' @details All the data fields, and their entries, can be seen and explored on neuromorpho.org
-#' at \url{http://neuromorpho.org/MetaData.jsp}. Coutns can be seen as pie charts under the 'browse'
+#' at \url{http://neuromorpho.org/MetaData.jsp}. Counts can be seen as pie charts under the 'browse'
 #' tab at \url{http://neuromorpho.org}, for example, \url{http://neuromorpho.org/byspecies.jsp}.
 #' @seealso \code{\link{neuromorpho_search}}, 
 #' \code{\link{neuromorpho_field_entries}},

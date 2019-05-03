@@ -3,7 +3,7 @@
 #' @description Test that the base neuromorpho.org API url, \url{http://neuromorpho.org/api}, can be reached. 
 #' The API provides access to the neuron information, 
 #' morphometry data and literature via three main endpoints 
-#' using conventional HTTP requests. Tehse endpoints are used by function in this package
+#' using conventional HTTP requests. These endpoints are used by function in this package
 #' to read neurons from the repository, get meat information associated with those neurons, and 
 #' perform limited searches of the literature describing neuronal morphologies.
 #' @inheritParams neuromorpho_read_neurons

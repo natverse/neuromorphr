@@ -70,8 +70,8 @@ neuromorpho_literature_field_entries <- function(field = "species",
 #'
 #' @description Search for literature in the neuromorpho.org repository. The returned 
 #' data frame can  be used to get article IDs and neuron names, that can be fed to \code{neuromorpho_get_article}, 
-#' in order to get ifnormation on studies that have submitted reconstructions to neuromorpho.org. 
-#' Searches are made by looking at the meta data for items of literature in the repositroy, 
+#' in order to get information on studies that have submitted reconstructions to neuromorpho.org. 
+#' Searches are made by looking at the meta data for items of literature in the repository, 
 #' i.e. querying for certain field entries for certain literature fields.
 #' @inheritParams neuromorpho_read_neurons
 #' @param search_terms a vector of search terms, with each term formatted as \code{"field:field entry"}.
@@ -125,7 +125,7 @@ neuromorpho_literature_search <- function(search_terms = c("species:Drosophila m
 #' @title Get the number of different articles for a neuromorpho literature field
 #'
 #' @description Returns a vector of counts for every field entry for a given neuromorpho literature field.
-#' E.g. you can find out how the number of papers that used particula neuron recosntruction softwares. 
+#' E.g. you can find out how the number of papers that used particular neuron reconstruction softwares. 
 #' @inheritParams neuromorpho_field_entries
 #' @param field a valid neuron field, as returned by \code{neuromorpho_fields}
 #' @details Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}. 

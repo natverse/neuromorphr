@@ -1,6 +1,6 @@
 #' @title Get all meta data associated with a neuron
 #'
-#' @description Retrieve the meta data assoicated with query neurons. Neurons can be queried using either their
+#' @description Retrieve the meta data associated with query neurons. Neurons can be queried using either their
 #' neuron ID or their name. 
 #' @inheritParams neuromorpho_read_neurons
 #' @details The meta data for reconstructions has been extracted by neuromorpho.org from corresponding publications, 
@@ -12,9 +12,9 @@
 #'   \item Brain region at three levels: main region/structure, sub-region, detailed sub-region (example: Hippocampus, dentate gyrus, granule cell layer)
 #'   \item Neuron type at three levels: main neuron class type, sub-class, detailed sub-class (example: Interneuron, basket cell, nested)
 #'   \item Reconstruction method
-#'   \item Format of original data, though currently this package only retreives the data as standardised by neuromorpho.org
+#'   \item Format of original data, though currently this package only retrieves the data as standardised by neuromorpho.org
 #' }
-#' @return a list containg all the meta data for a neuron stored on neuromorpho.org
+#' @return a list containing all the meta data for a neuron stored on neuromorpho.org
 #' @seealso \code{\link{neuromorpho_search}}, 
 #' \code{\link{neuromorpho_field_entries}},
 #' \code{\link{neuromorpho_fields}}
@@ -65,14 +65,14 @@ neuromorpho_neuron_info <- function(neuron_name = NULL,
 
 #' @title Get some of the meta data associated with a neuron
 #'
-#' @description Retrieve some the meta data assoicated with query neurons, in a compact way. Neurons can be queried using either their
+#' @description Retrieve some the meta data associated with query neurons, in a compact way. Neurons can be queried using either their
 #' neuron ID or their name. 
 #' @inheritParams neuromorpho_read_neurons
 #' @details The meta data for reconstructions has been extracted by neuromorpho.org from corresponding publications. 
 #' Some of these neuron fields will have multiple entries, 
 #' for example there might be multiple designations for a cell type, or brain region, 
 #' or multiple labs count be credited for a neuron's reconstruction. 
-#' This function returns the majority of the information stored on neuromorpho.org for a given setof neurons, 
+#' This function returns the majority of the information stored on neuromorpho.org for a given set of neurons, 
 #' but collapses some field entries into one field entry, so we can use a simpler data structure (a data.frame) to represent 
 #' this information, rather than a list. This is useful for adding to \code{neuronlist} objects as an attribute, as is standard in 
 #' \code{nat} family packages. If \code{light = TRUE}, then only the following information is returned in the final data frame:

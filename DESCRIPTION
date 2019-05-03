@@ -6,7 +6,7 @@ Authors@R: c(
     person("Alexander", "Bates", email = "alexander.shakeel.bates@gmail.com", role = c("aut", "cre"), 
     comment = c(ORCID = "0000-0002-1195-0445"))
     )
-Description: Access to the neuromorpoh.org repository (version 7.7 ), enabling users to easily find and use neurons in this repository with nat family packages.
+Description: Access to the neuromorpho.org repository (version 7.7 ), enabling users to easily find and use neurons in this repository with nat family packages.
     This respository is a centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. 
     It is continuously updated as new morphological reconstructions are collected, published, and shared. 
     To date, neuromorpho.org is the largest collection of publicly accessible 3D neuronal reconstructions and associated metadata.
