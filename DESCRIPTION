@@ -17,7 +17,8 @@ LazyData: true
 Suggests: 
     spelling,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
 Depends: R (>= 2.10)
 Imports: httr, jsonlite, nat, curl, utils
 Encoding: UTF-8

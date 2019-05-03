@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/)
+[![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Coverage status](https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg)](https://codecov.io/github/jefferislab/neuromorphr?branch=master) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/)
 
 neuromorphr
 ===========
@@ -82,7 +82,7 @@ plot3d(pyramidal.cells, col = as.factor(species))
 
 Here's a subset. In red, elephant, and in blue, whale, cortical pyramidal neurons:
 
-![elephant,whale,mouse neurons](https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png)
+![3dneurons](https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png)
 
 Submit to neuromorpho.org
 -------------------------
