@@ -78,7 +78,7 @@
 neuromorpho_read_neurons <- function(neuron_name = NULL, 
                                      neuron_id = NULL,
                                      nat = TRUE,
-                                     batch.size = 10,
+                                     batch.size = 2,
                                      meta = TRUE,
                                      light = TRUE,
                                      find = FALSE,

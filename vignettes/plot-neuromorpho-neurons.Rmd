@@ -84,10 +84,10 @@ These functions send asynchronous requests to the [neuromorpho.org](http://neuro
 
 ```{r read.neurons, eval = FALSE}
 # Read the whale neurons
-whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, batch.size = 10, nat = TRUE, progress = TRUE)
+whale.pyramidal.cells = neuromorpho_read_neurons(neuron_name = whale.neuron_names, batch.size = 2, nat = TRUE, progress = TRUE)
 
 # And read the elephant neurons
-elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuron_names, batch.size = 10, nat = TRUE, progress = TRUE)
+elephant.pyramidal.cells = neuromorpho_read_neurons(neuron_name = elephant.neuron_names, batch.size = 2, nat = TRUE, progress = TRUE)
 ```
 
 ## Plot neurons
@@ -122,7 +122,7 @@ mouse.df = neuromorpho_search(search_terms= c("species:mouse", "brain_region:neo
 mouse.neuron_name = mouse.df$neuron_name[grepl("pyramidal",mouse.df$cell_type)]
 
 # Read
-mouse.pyramidal.cells = neuromorpho_read_neurons(neuron_name = mouse.neuron_name, batch.size = 25, nat = TRUE, progress = TRUE, find = FALSE)
+mouse.pyramidal.cells = neuromorpho_read_neurons(neuron_name = mouse.neuron_name, batch.size = 2, nat = TRUE, progress = TRUE, find = FALSE)
 ## warnings? - sometimes a file is missing from the repository it seems, or can otherwise not be accessed, so we lost a few cells ...
 ## In fact, the file names on neuromorpho are not entirely consistent with one another. You can try using find = TRUE, which will
 ## mean that this function runs slower, but scrapes the webpages for the correct dowbnload URL, which may slightly improve neuron retrieval 

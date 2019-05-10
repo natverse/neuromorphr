@@ -69,7 +69,7 @@ Here is a quick example for reading some neocortical rat, elephant and whale neu
 neocortex.df = neuromorpho_search(search_terms= c("species:elephant,humpback whale,rat", "brain_region:neocortex"))
 
 ## Pull measurements, in a data frame
-measurements = neuromorpho_morphometry(neocortex.df$neuron_name, batch.size = 100, data_frame = TRUE)
+measurements = neuromorpho_morphometry(neocortex.df$neuron_name, batch.size = 2, data_frame = TRUE)
  
 ## Assign species column
 measurements$species = neocortex.df[rownames(measurements),"species"]
@@ -85,7 +85,7 @@ boxplot(as.numeric(volume)~species, data=measurements, notch=FALSE,
       main="neocortical neuron volumes", xlab="species")
 
 ## Read neurons
-pyramidal.cells = neuromorpho_read_neurons(neuron_name = neocortex.df$neuron_name, batch.size = 100, nat = TRUE, progress = TRUE)
+pyramidal.cells = neuromorpho_read_neurons(neuron_name = neocortex.df$neuron_name, batch.size = 2, nat = TRUE, progress = TRUE)
 
 ## Plot 3D
 plot3d(pyramidal.cells, col = as.factor(species))

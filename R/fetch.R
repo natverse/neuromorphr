@@ -68,6 +68,7 @@ neuromorpho_async_req <- function(urls,
                                   message = NULL,
                                   ...){
   neuromorpho_is_api_healthy()
+  check_batch_size(batch.size=batch.size)
   batches = ceiling(length(urls)/batch.size)
   i = 1
   data <- list()
@@ -161,4 +162,17 @@ neuromorpho_error_check <- function(x){
     }
     NULL
 }
+
+# hidden
+check_batch_size <-function(batch.size){
+  if (batch.size > 5){
+    warning("Currently, the infastructure of neuromorpho.org cannot support too many requests at once,
+            and does not have support for rate limiting. The API would be fine with 5 times per second
+            and the web page once every 5 seconds. To prevent crashing the site, batch.size <= 5 is preferable, 
+            yours is ", batch.size)
+  }else{
+    NULL
+  }
+}
+
 
