@@ -6,7 +6,7 @@
 \title{Read neurons from neuromorpho.org}
 \usage{
 neuromorpho_read_neurons(neuron_name = NULL, neuron_id = NULL,
-  nat = TRUE, batch.size = 10, meta = TRUE, light = TRUE,
+  nat = TRUE, batch.size = 2, meta = TRUE, light = TRUE,
   find = FALSE, progress = TRUE,
   neuromorpho_url = "http://neuromorpho.org", ...)
 
