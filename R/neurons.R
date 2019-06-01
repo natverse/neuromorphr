@@ -113,7 +113,10 @@ neuromorpho_read_neurons <- function(neuron_name = NULL,
   if(nat){
     neurons = nat::neuronlist()
     for(swc in resn){
-      neurons = c(neurons, nat::as.neuronlist(nat::as.neuron(swc)))
+      n = tryCatch(nat::as.neuronlist(nat::as.neuron(swc)), error = function(e) NULL)
+      if(!is.null(n)){
+        neurons = c(neurons, n)
+      }
     }
   }else{
     neurons = resn
