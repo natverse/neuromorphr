@@ -112,10 +112,13 @@ neuromorpho_read_neurons <- function(neuron_name = NULL,
   neuron_name = neuron_name[retrieved]
   if(nat){
     neurons = nat::neuronlist()
-    for(swc in resn){
+    success = c()
+    for(s in 1:length(resn)){
+      swc = resn[[s]]
       n = tryCatch(nat::as.neuronlist(nat::as.neuron(swc)), error = function(e) NULL)
       if(!is.null(n)){
         neurons = c(neurons, n)
+        success = c(success, s)
       }
     }
   }else{
@@ -123,8 +126,7 @@ neuromorpho_read_neurons <- function(neuron_name = NULL,
   }
   if(meta|nat){
     df = df[retrieved,]
-  }
-  if(meta){
+    df = df[success,]
     attr(neurons, "df") = df
   }
   if(nat){
