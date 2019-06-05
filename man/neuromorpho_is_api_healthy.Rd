@@ -16,15 +16,19 @@ neuromorpho_is_api_healthy(neuromorpho_url = "http://neuromorpho.org",
 TRUE if the API can be reached, FALSE with a warning, if not
 }
 \description{
-Test that the base neuromorpho.org API url, \url{http://neuromorpho.org/api}, can be reached. 
+Test that the base neuromorpho.org API url, 
+\url{http://neuromorpho.org/api}, can be reached. 
 The API provides access to the neuron information, 
 morphometry data and literature via three main endpoints 
-using conventional HTTP requests. These endpoints are used by function in this package
-to read neurons from the repository, get meat information associated with those neurons, and 
+using conventional HTTP requests. 
+These endpoints are used by function in this package
+to read neurons from the repository, 
+get meta information associated with those neurons, and 
 perform limited searches of the literature describing neuronal morphologies.
 }
 \details{
-Checks to see whether status the neuromorpho.org API is 'UP' at \url{http://neuromorpho.org/api/health}
+Checks to see whether status the neuromorpho.org API is 'UP' at 
+\url{http://neuromorpho.org/api/health}
 }
 \examples{
 \dontrun{

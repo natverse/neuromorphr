@@ -1,13 +1,17 @@
 #' @title Check whether the neuromorpho.org API is up and running
 #'
-#' @description Test that the base neuromorpho.org API url, \url{http://neuromorpho.org/api}, can be reached. 
+#' @description Test that the base neuromorpho.org API url, 
+#' \url{http://neuromorpho.org/api}, can be reached. 
 #' The API provides access to the neuron information, 
 #' morphometry data and literature via three main endpoints 
-#' using conventional HTTP requests. These endpoints are used by function in this package
-#' to read neurons from the repository, get meat information associated with those neurons, and 
+#' using conventional HTTP requests. 
+#' These endpoints are used by function in this package
+#' to read neurons from the repository, 
+#' get meta information associated with those neurons, and 
 #' perform limited searches of the literature describing neuronal morphologies.
 #' @inheritParams neuromorpho_read_neurons
-#' @details Checks to see whether status the neuromorpho.org API is 'UP' at \url{http://neuromorpho.org/api/health}
+#' @details Checks to see whether status the neuromorpho.org API is 'UP' at 
+#' \url{http://neuromorpho.org/api/health}
 #' @return TRUE if the API can be reached, FALSE with a warning, if not
 #' @seealso \code{\link{neuromorpho_search}}, 
 #' \code{\link{neuromorpho_read_neurons}},
@@ -50,14 +54,17 @@ neuromorpho_is_api_healthy <- function(neuromorpho_url = "http://neuromorpho.org
 #' @details Speed querying neuromorpho.org by making batches of AJAX style concurrent requests, 
 #' using using \code{\link[curl]{multi_run}}, and running a custom function on the responses to these requests. 
 #' @return a list of data retrieved from the requests defined by \code{urls}, and processed by \code{FUN}
-#' @seealso  
-#' \code{\link{neuromorpho_read_neurons}}
+#' @seealso  \code{\link{neuromorpho_read_neurons}}
 #' @examples 
 #' \dontrun{ 
 #' # Let's just grab metadata for all neurons in neuromorpho
-#' all.species = neuromorpho_field_entries(field="species)
-#' urls = paste0("http://neuromorpho.org/api/neuron/select?q=species:", all.species) 
-#' res = neuromorpho_async_req(urls = urls, batch.size = 10, progress = TRUE, message = "having a look")
+#' all.species = neuromorpho_field_entries(field="species")
+#' urls = paste0("http://neuromorpho.org/api/neuron/select?q=species:", 
+#'               all.species) 
+#' res = neuromorpho_async_req(urls = urls, 
+#'                             batch.size = 10, 
+#'                             progress = TRUE, 
+#'                             message = "having a look")
 #' }
 #' @export
 #' @rdname neuromorpho_async_req

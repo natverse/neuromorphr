@@ -1,0 +1,160 @@
+---
+title: "plot-insectbraindb-brains"
+author: "Alexander Bates"
+date: "2019-05-04"
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{plot-insectbraindb-brains}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+> "INSECTS possess a nervous system that is incredibly complex and differentiated, and whose sophistication attains ultramicroscopic levels ...
+  Certainly, the grey substance [of the brain of vertebrates] has increased considerably in mass, but when one compares its structure with that of the brain of
+  Apidae or Libellulidae, it looks as excessively coarse and rudimentary. It is like pretending to match the rough merit of a standing wall clock with that of a pocket watch,
+  a marvel of delicacy and precision. As usually, the genius of life shines more in the construction of smaller than larger master pieces."
+([SR y Cajal](https://www.britannica.com/biography/Santiago-Ramon-y-Cajal))
+
+# Inspecting insect brains
+
+It's not often that you get to see brains from a range of different beautiful insects. They look quite funky. I wonder how the size of their sub-domains change with the size of the brain itself? We can use `neuromorphr` alongside its dependency, `nat` to pull and plot these brains, which are hosted and curated by [insectbraindb.org](https://insectbraindb.org/app/)
+
+## Find brains
+
+First, we need to find the brains hosted on [insectbraindb.org](https://insectbraindb.org/app/). These are required, because we need at least one of these two bits of information in order to read neurons from the repository.
+
+To find these items, let us search the repository for neurons from the two groups of animal in which we are interested:
+
+```{r find.species, eval = FALSE}
+# Load package
+library(neuromorphr)
+library(nat)
+
+# Righto, which species does the database host?
+species_info = insectbraindb_species_info()
+insect.species = unique(species_info$scientific_name)
+
+# Okay, so a bunch of bees, wasps, moths, beetles and 'worms'
+print(unique(species_info$common_name))
+```
+
+## Read brains
+
+Armed with this information, we can now read the the brains as `nat` package `hxsurf` objects. You can find a detailed explanation of this data format, and its basic manipulation with `nat` tools, [here](https://jefferis.github.io/nat/). Importantly, we can sub-divide a `hxsurf` brain by its contituent regions, in this case, neuropils, for visualisation and analysis.
+
+```{r read.brains, eval = FALSE}
+# Let's try to read every brain the repository has
+insect.brains = list()
+for(insect in insect.species){
+  message("Pulling ", insect, " brain mesh")
+  for(sex in c("UNKNOWN", "MALE", "FEMALE")){
+    message(sex)
+    insect.brain = insectbraindb_read_brain(species = insect, sex  = sex, progress = TRUE)
+    insect.sex = paste(insect, sex, sep = " ")
+  }
+  if(!is.null(insect.brain)){
+    insect.brains[[insect.sex]] = insect.brain  
+  }
+}
+# You will notice that we failed to read two brains there. It seems there is no reconstruction yet for Bombus terrestris, and that the Helicoverpa armigera requires a user with an account on insectbraindb.org 
+
+# Let's also chuck in a Drosophila melanogaster brain for good measure 
+if(!require('devtools')) install.packages("devtools")
+if(!require('nat.flybrains')) devtools::install_github("jefferislab/nat.flybrains")
+insect.brains[["Drosophila melanogaster UNKNOWN"]] = nat.flybrains::JFRC2NP.surf
+# It is the best of the insects after all
+```
+
+## Plot brains
+
+Now we have a fair few brains. They can't be plotted together really, at least not as 3D objects. But we can write some code to scan through them and have a quick looksee
+
+```{r plot.3d.brains, eval = FALSE}
+# Hold right click to pan
+nat::nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759, 
+-0.00371213257312775, 0, -0.00464127957820892, -0.941770493984222, 
+-0.336223870515823, 0, -0.00228461623191833, 0.336236596107483, 
+-0.941774606704712, 0, 0, 0, 0, 1), .Dim = c(4L, 4L)), zoom = 0.600000023841858, 
+    windowRect = c(1460L, 65L, 3229L, 1083L))
+for(ib in insect.brains){
+  clear3d()
+  message(ib$scientific_name, " the ", ib$common_name)
+  plot3d(ib)
+  progress = readline(prompt = "Press any key for next brain ... ")
+}
+```
+
+## Plot lateral horns
+
+We can also subset these brains by a particular brain area. Everyone likes the antennal lobe, maybe it's the best studied bit of insect neuro-anatomy. So let's have a gander at that.
+
+```{r plot.3d.antennal.lobe, eval = FALSE}
+# Let's have a look at how standardised the neuropil names are, across these species
+neuropils = lapply(insect.brains, function(brain) sort(brain$full_names))
+neuropils[[1]]
+# Brains that contain a lateral horn neuropil object
+with.al = sapply(insect.brains, function(ib) sum(grepl("Antennal", ib$full_names))>0)
+insect.brains.with.al = insect.brains[with.al]
+insect.brains.with.al[["Drosophila melanogaster"]] = nat.flybrains::JFRC2NP.surf
+
+# Hold right click to pan
+nat::nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759, 
+-0.00371213257312775, 0, -0.00464127957820892, -0.941770493984222, 
+-0.336223870515823, 0, -0.00228461623191833, 0.336236596107483, 
+-0.941774606704712, 0, 0, 0, 0, 1), .Dim = c(4L, 4L)), zoom = 0.600000023841858, 
+    windowRect = c(1460L, 65L, 3229L, 1083L))
+for(ib in insect.brains.with.al){
+  clear3d()
+  message(ib$scientific_name, " the ", ib$common_name)
+  plot3d(subset(ib, "AL"), col = "red")
+  plot3d(ib, col = "lightgrey", alpha = 0.3)
+  progress = readline(prompt = "Press any key for next brain ... ")
+}
+```
+
+Fab. Now what we really might like to know if how the volume of the antennal lobe differs across species. So let's put our analysis hat on and take a look at that.
+
+```{r get.al.volumes, eval = FALSE}
+# There are a few ways of calculating a volume for a mesh. I am going to be lazy and use the package alphashape3d.
+# We will also use pbapply, because volume calculation can take some time, and it is nice to know how things are going
+if(!require('alphashape3d')) install.packages("alphashape3d")
+if(!require('pbapply')) install.packages("pbapply")
+
+# Create function to calculate volume
+calculate_volume <- function(brain, neuropil = NULL, alpha = 30){
+  if(is.null(neuropil)){
+    points = unique(nat::xyzmatrix(brain))
+  }else{
+    points = unique(nat::xyzmatrix(subset(brain, neuropil)))
+  }
+  a = ashape3d(points, alpha = alpha, pert = TRUE)
+  volume_ashape3d(a)
+}
+
+# Get the volumes for the whole brain
+insect.brain.volumes = pbapply::pbsapply(insect.brains.with.al, calculate_volume, neuropil = NULL)
+
+# Get the volumes for just the antennal lobe
+insect.al.volumes = pbapply::pbsapply(insect.brains.with.al, calculate_volume, neuropil = "AL|AL_|AL_right|AL_left")
+
+# Hmm, that took a while
+```
+
+We can then use the wonderful ggplot2 package to visualise this data
+
+```{r ggplot2.volumes, eval = FALSE}
+
+```
+
+
+
+Of course, to be sure, we would need to control by reconstruction method and work harder to establish the exact cell type correspondences.

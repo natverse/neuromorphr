@@ -3,6 +3,9 @@ nullToNA <- function(x) {
   x[sapply(x, is.null)] <- NA
   return(x)
 }
+changenull <- function(x, to = ""){
+  ifelse(is.null(x),to,x)
+}
 
 # hidden
 neuromorpho_progress <- function (x, max = 100, message = "querying neuromorpho") {

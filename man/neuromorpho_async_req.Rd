@@ -36,6 +36,18 @@ and wait for them all to complete before further batch-wise processing.
 Speed querying neuromorpho.org by making batches of AJAX style concurrent requests, 
 using using \code{\link[curl]{multi_run}}, and running a custom function on the responses to these requests.
 }
+\examples{
+\dontrun{ 
+# Let's just grab metadata for all neurons in neuromorpho
+all.species = neuromorpho_field_entries(field="species")
+urls = paste0("http://neuromorpho.org/api/neuron/select?q=species:", 
+              all.species) 
+res = neuromorpho_async_req(urls = urls, 
+                            batch.size = 10, 
+                            progress = TRUE, 
+                            message = "having a look")
+}
+}
 \seealso{
 \code{\link{neuromorpho_read_neurons}}
 }
