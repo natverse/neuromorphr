@@ -88,6 +88,9 @@ stored on neuromorpho.org. See details for the sort of measurements you can get.
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/plot-insectbraindb-brains.html">plot-insectbraindb-brains</a>
+    </li>
+    <li>
       <a href="../articles/plot-neuromorpho-neurons.html">plot-neuromorpho-neurons</a>
     </li>
   </ul>
@@ -158,7 +161,7 @@ a nested list (dictionary-like) has been returned for a neuron, this option will
     </tr>
     <tr>
       <th>neuromorpho_url</th>
-      <td><p>the base URL for querying the neuromorpho databse, defaults to <a href='http://neuromorpho.org'>http://neuromorpho.org</a></p></td>
+      <td><p>the base URL for querying the neuromorpho database, defaults to <a href='http://neuromorpho.org'>http://neuromorpho.org</a></p></td>
     </tr>
     <tr>
       <th>progress</th>
@@ -178,18 +181,18 @@ If <code>TRUE</code>, or <code>100</code>, the bar completes where all batches a
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>neurmorpho.org calculates some basic measures for neuronal skeleton reconstructions. Distances are given in μm, and angles in °. Typical measures:
+    <p>neurmorpho.org calculates some basic measures for neuronal skeleton reconstructions. Distances are given in micrometers, and angles in °. Typical measures:
 #'</p><ul>
 <li><p>neuron_name</p></li>
 <li><p>neuron_id</p></li>
-<li><p>surface (μm^2) -- Total arborisation surface area</p></li>
-<li><p>volume (μm^3) -- Total internal volume of the arborisation</p></li>
+<li><p>surface (micrometers^2) -- Total arborisation surface area</p></li>
+<li><p>volume (micrometers^3) -- Total internal volume of the arborisation</p></li>
 <li><p>n_branch -- Total number of branches</p></li>
-<li><p>width  (μm) -- Neuronal width (95<!-- % of second principal component) --></p></li>
-<li><p>height (μm) -- Neuronal height (95<!-- % of first principal component) --></p></li>
-<li><p>depth (μm) -- Neuronal depth (95<!-- % of third principal component) --></p></li>
-<li><p>diameter (μm) -- Average branch diameter</p></li>
-<li><p>eucDistance (μm) -- Maximum Euclidean (straight) distance from soma to tips</p></li>
+<li><p>width  (micrometers) -- Neuronal width (95<!-- % of second principal component) --></p></li>
+<li><p>height (micrometers) -- Neuronal height (95<!-- % of first principal component) --></p></li>
+<li><p>depth (micrometers) -- Neuronal depth (95<!-- % of third principal component) --></p></li>
+<li><p>diameter (micrometers) -- Average branch diameter</p></li>
+<li><p>eucDistance (micrometers) -- Maximum Euclidean (straight) distance from soma to tips</p></li>
 <li><p>pathDistance -- Maximum Path (along the tree) distance from soma to tips</p></li>
 <li><p>branch_Order -- Maximum Branch order (number of bifurcations from soma to tips)</p></li>
 <li><p>contraction -- Average Contraction (the ratio between Euclidean and path length calculated on each branch)</p></li>
@@ -199,11 +202,11 @@ If <code>TRUE</code>, or <code>100</code>, the bar completes where all batches a
 <li><p>pk_classic</p></li>
 <li><p>bif_ampl_local</p></li>
 <li><p>fractal_Dim</p></li>
-<li><p>soma_Surface (μm^2) -- Soma surface area</p></li>
+<li><p>soma_Surface (micrometers^2) -- Soma surface area</p></li>
 <li><p>n_stems -- Total number of branches (bifurcations plus terminations)</p></li>
 <li><p>n_bifs -- Total number of bifurcations</p></li>
 <li><p>bif_ampl_remote</p></li>
-<li><p>length (μm) -- Total arborisation length</p></li>
+<li><p>length (micrometers) -- Total arborisation length</p></li>
 <li><p>Local Bifurcation angle (average over all bifurcations of the angle between the first two daughter compartments)</p></li>
 <li><p>Remote Bifurcation angle (average over all bifurcations of the angle between the following bifurcations or tips)</p></li>
 </ul>
@@ -225,7 +228,10 @@ If <code>TRUE</code>, or <code>100</code>, the bar completes where all batches a
                                                       <span class='st'>"brain_region:neocortex"</span>))
 
 <span class='co'>## Pull measurements, in a data frame</span>
-<span class='no'>measurements</span> <span class='kw'>=</span> <span class='fu'>neuromorpho_morphometry</span>(<span class='no'>big.neocortex.df</span>$<span class='no'>neuron_name</span>, <span class='kw'>data_frame</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; |++                                                | ~4% pulling neuromorpho measurements|++++                                              | ~8% pulling neuromorpho measurements|++++++                                            | ~12% pulling neuromorpho measurements|++++++++                                          | ~16% pulling neuromorpho measurements|++++++++++                                        | ~20% pulling neuromorpho measurements|++++++++++++                                      | ~25% pulling neuromorpho measurements|++++++++++++++                                    | ~29% pulling neuromorpho measurements|++++++++++++++++                                  | ~33% pulling neuromorpho measurements|++++++++++++++++++                                | ~37% pulling neuromorpho measurements|++++++++++++++++++++                              | ~41% pulling neuromorpho measurements|++++++++++++++++++++++                            | ~45% pulling neuromorpho measurements|+++++++++++++++++++++++++                         | ~50% pulling neuromorpho measurements|+++++++++++++++++++++++++++                       | ~54% pulling neuromorpho measurements|+++++++++++++++++++++++++++++                     | ~58% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++                   | ~62% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++                 | ~66% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++               | ~70% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++             | ~75% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++           | ~79% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++         | ~83% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++       | ~87% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++++     | ~91% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++++++   | ~95% pulling neuromorpho measurements|++++++++++++++++++++++++++++++++++++++++++++++++++| ~100% pulling neuromorpho measurements</div><div class='input'>
+<span class='no'>measurements</span> <span class='kw'>=</span> <span class='fu'>neuromorpho_morphometry</span>(<span class='no'>big.neocortex.df</span>$<span class='no'>neuron_name</span>, <span class='kw'>data_frame</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Currently, the infastructure of neuromorpho.org cannot support too many requests at once,</span>
+#&gt; <span class='warning'>            and does not have support for rate limiting. The API would be fine with 5 times per second</span>
+#&gt; <span class='warning'>            and the web page once every 5 seconds. To prevent crashing the site, batch.size &lt;= 5 is preferable, </span>
+#&gt; <span class='warning'>            yours is 10</span></div><div class='output co'>#&gt; |++                                                | ~4% pulling neuromorpho measurements|++++                                              | ~8% pulling neuromorpho measurements|++++++                                            | ~12% pulling neuromorpho measurements|++++++++                                          | ~16% pulling neuromorpho measurements|++++++++++                                        | ~20% pulling neuromorpho measurements|++++++++++++                                      | ~25% pulling neuromorpho measurements|++++++++++++++                                    | ~29% pulling neuromorpho measurements|++++++++++++++++                                  | ~33% pulling neuromorpho measurements|++++++++++++++++++                                | ~37% pulling neuromorpho measurements|++++++++++++++++++++                              | ~41% pulling neuromorpho measurements|++++++++++++++++++++++                            | ~45% pulling neuromorpho measurements|+++++++++++++++++++++++++                         | ~50% pulling neuromorpho measurements|+++++++++++++++++++++++++++                       | ~54% pulling neuromorpho measurements|+++++++++++++++++++++++++++++                     | ~58% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++                   | ~62% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++                 | ~66% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++               | ~70% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++             | ~75% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++           | ~79% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++         | ~83% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++       | ~87% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++++     | ~91% pulling neuromorpho measurements|+++++++++++++++++++++++++++++++++++++++++++++++   | ~95% pulling neuromorpho measurements|++++++++++++++++++++++++++++++++++++++++++++++++++| ~100% pulling neuromorpho measurements</div><div class='input'>
 <span class='co'>## Assign species column</span>
 <span class='no'>measurements</span>$<span class='no'>species</span> <span class='kw'>=</span> <span class='no'>big.neocortex.df</span>[<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span>(<span class='no'>measurements</span>),<span class='st'>"species"</span>]
 

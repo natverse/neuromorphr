@@ -33,7 +33,7 @@
 
 <meta property="og:title" content="Get some of the meta data associated with a neuron — neuromorpho_neurons_meta" />
 
-<meta property="og:description" content="Retrieve some the meta data assoicated with query neurons, in a compact way. Neurons can be queried using either their
+<meta property="og:description" content="Retrieve some the meta data associated with query neurons, in a compact way. Neurons can be queried using either their
 neuron ID or their name." />
 <meta name="twitter:card" content="summary" />
 
@@ -88,6 +88,9 @@ neuron ID or their name." />
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/plot-insectbraindb-brains.html">plot-insectbraindb-brains</a>
+    </li>
+    <li>
       <a href="../articles/plot-neuromorpho-neurons.html">plot-neuromorpho-neurons</a>
     </li>
   </ul>
@@ -123,7 +126,7 @@ neuron ID or their name." />
 
     <div class="ref-description">
     
-    <p>Retrieve some the meta data assoicated with query neurons, in a compact way. Neurons can be queried using either their
+    <p>Retrieve some the meta data associated with query neurons, in a compact way. Neurons can be queried using either their
 neuron ID or their name.</p>
     
     </div>
@@ -166,7 +169,7 @@ Increasing the value of <code>batch.size</code> may reduce read time.</p></td>
     </tr>
     <tr>
       <th>neuromorpho_url</th>
-      <td><p>the base URL for querying the neuromorpho databse, defaults to <a href='http://neuromorpho.org'>http://neuromorpho.org</a></p></td>
+      <td><p>the base URL for querying the neuromorpho database, defaults to <a href='http://neuromorpho.org'>http://neuromorpho.org</a></p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -184,7 +187,7 @@ Increasing the value of <code>batch.size</code> may reduce read time.</p></td>
 Some of these neuron fields will have multiple entries, 
 for example there might be multiple designations for a cell type, or brain region, 
 or multiple labs count be credited for a neuron's reconstruction. 
-This function returns the majority of the information stored on neuromorpho.org for a given setof neurons, 
+This function returns the majority of the information stored on neuromorpho.org for a given set of neurons, 
 but collapses some field entries into one field entry, so we can use a simpler data structure (a data.frame) to represent 
 this information, rather than a list. This is useful for adding to <code>neuronlist</code> objects as an attribute, as is standard in 
 <code>nat</code> family packages. If <code>light = TRUE</code>, then only the following information is returned in the final data frame:</p><ul>

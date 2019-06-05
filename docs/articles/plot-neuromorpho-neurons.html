@@ -54,6 +54,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/plot-insectbraindb-brains.html">plot-insectbraindb-brains</a>
+    </li>
+    <li>
       <a href="../articles/plot-neuromorpho-neurons.html">plot-neuromorpho-neurons</a>
     </li>
   </ul>
@@ -142,12 +145,12 @@ elephant.neuron_names =<span class="st"> </span><span class="kw"><a href="https:
 <a href="#read-neurons" class="anchor"></a>Read neurons</h2>
 <p>Armed with this information, we can now read the neurons as <code>nat</code> package <code>neuronlist</code> objects. You can find a detailed explanation of this data format, and its basic manipulation with <code>nat</code> tools, <a href="https://jefferis.github.io/nat/">here</a>.</p>
 <p>Sometimes reading neurons can take a while, because <a href="http://neuromorpho.org">neuromorpho.org</a> is fairly slow. We’ll want to have <code>progress = TRUE</code> on in the following functions, so that we get a sense for how long it’s taking.</p>
-<p>These fucntions send asynchronous requests to the <a href="http://neuromorpho.org">neuromorpho.org</a> API in parallel in order to speed things up. In one run, <code>batch.size</code> requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or <a href="http://neuromorpho.org">neuromorpho.org</a> will fail for capacity reasons.</p>
+<p>These functions send asynchronous requests to the <a href="http://neuromorpho.org">neuromorpho.org</a> API in parallel in order to speed things up. In one run, <code>batch.size</code> requests are sent, and once this pool of requests has been processed, the progress bar will update. You can increase this value to speed up the read, but do not put it too high or <a href="http://neuromorpho.org">neuromorpho.org</a> will fail for capacity reasons.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read the whale neurons</span>
-whale.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> whale.neuron_names, <span class="dt">batch.size =</span> <span class="dv">10</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)
+whale.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> whale.neuron_names, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># And read the elephant neurons</span>
-elephant.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> elephant.neuron_names, <span class="dt">batch.size =</span> <span class="dv">10</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)</code></pre></div>
+elephant.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> elephant.neuron_names, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="plot-neurons" class="section level2">
 <h2 class="hasAnchor">
@@ -172,7 +175,7 @@ mouse.df =<span class="st"> </span><span class="kw"><a href="../reference/neurom
 mouse.neuron_name =<span class="st"> </span>mouse.df<span class="op">$</span>neuron_name[<span class="kw"><a href="https://rdrr.io/r/base/grep.html">grepl</a></span>(<span class="st">"pyramidal"</span>,mouse.df<span class="op">$</span>cell_type)]
 
 <span class="co"># Read</span>
-mouse.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> mouse.neuron_name, <span class="dt">batch.size =</span> <span class="dv">25</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>, <span class="dt">find =</span> <span class="ot">FALSE</span>)
+mouse.pyramidal.cells =<span class="st"> </span><span class="kw"><a href="../reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> mouse.neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>, <span class="dt">find =</span> <span class="ot">FALSE</span>)
 ## warnings? - sometimes a file is missing from the repository it seems, or can otherwise not be accessed, so we lost a few cells ...
 ## In fact, the file names on neuromorpho are not entirely consistent with one another. You can try using find = TRUE, which will
 ## mean that this function runs slower, but scrapes the webpages for the correct dowbnload URL, which may slightly improve neuron retrieval 

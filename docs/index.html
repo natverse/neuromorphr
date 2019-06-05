@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R client utilities for interacting with the neuromorpho.org repository • neuromorphr</title>
+<title>R client utilities for interacting with neuron morphology repositories • neuromorphr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="R client utilities for interacting with the neuromorpho.org repository">
-<meta property="og:description" content="Access to the neuromorpoh.org repository (version 7.7 ), enabling users to easily find and use neurons in this repository with nat family packages.
-    This respository is a centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. 
+<script src="pkgdown.js"></script><meta property="og:title" content="R client utilities for interacting with neuron morphology repositories">
+<meta property="og:description" content="Access to the NeuroMorpho.org repository (version 7.7 ) and several other single-cell neuron databases, enabling users to easily find and use neurons in this repository with nat family packages.
+    NeuroMorpho.org is a centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. 
     It is continuously updated as new morphological reconstructions are collected, published, and shared. 
     To date, neuromorpho.org is the largest collection of publicly accessible 3D neuronal reconstructions and associated metadata.
     Principally curated by Georgio Ascoli at George Mason university, contact the curators at: neuromorpho@gmail.com.">
@@ -58,6 +58,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/plot-insectbraindb-brains.html">plot-insectbraindb-brains</a>
+    </li>
+    <li>
       <a href="articles/plot-neuromorpho-neurons.html">plot-neuromorpho-neurons</a>
     </li>
   </ul>
@@ -93,16 +96,20 @@
 <div id="neuromorphr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#neuromorphr" class="anchor"></a>neuromorphr</h1></div>
-<p>The goal of <em>neuromorphr</em> is to provide R client utilities for interacting with the <a href="http://neuromorpho.org/api.jsp">API</a> for <a href="http://neuromorpho.org">neuromorpho.org</a>, which is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many <a href="http://neuromorpho.org/acknowl.jsp">here</a>). To date, <a href="http://neuromorpho.org">neuromorpho.org</a> is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with veriosn 7.7 of <a href="http://neuromorpho.org">neuromorpho.org</a>. In the following, we detail some of its functionality, and copy and paste some text from <a href="http://neuromorpho.org">neuromorpho.org</a> in order to fill you in on its database and outlook. If python is more your poison, there are a few python clients available, for example from <a href="https://github.com/BonsaiNet/Neuromorpho.org">BonsaiNet</a>. Using this R package in concert with the <a href="https://github.com/jefferis/nat">nat</a> ecosystem developed primarily by <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Gregory Jefferis</a> is highly recommended. The curators of <a href="http://neuromorpho.org">neuromorpho.org</a> can be contacted at <em><a href="mailto:nmadmin@gmu.edu">nmadmin@gmu.edu</a></em>.</p>
+<p>The goal of <em>neuromorphr</em> is to provide R client utilities for interacting with the <a href="http://neuromorpho.org/api.jsp">API</a> for <a href="http://neuromorpho.org">neuromorpho.org</a>, as well as other, smaller repositories for single-cell neuron morphologies. The site <a href="http://neuromorpho.org">neuromorpho.org</a> is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many <a href="http://neuromorpho.org/acknowl.jsp">here</a>). To date, <a href="http://neuromorpho.org">neuromorpho.org</a> is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with version 7.7 of <a href="http://neuromorpho.org">neuromorpho.org</a>, as well as the <a href="https://insectbraindb.org/app/">insectbraindb</a> (see below).</p>
+<p>If python is more your poison, there are a few python clients available, for example from <a href="https://github.com/BonsaiNet/Neuromorpho.org">BonsaiNet</a>. Using this R package in concert with the <a href="https://github.com/jefferis/nat">nat</a> ecosystem developed primarily by <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Gregory Jefferis</a> is highly recommended. The curators of <a href="http://neuromorpho.org">neuromorpho.org</a> can be contacted at <em><a href="mailto:nmadmin@gmu.edu">nmadmin@gmu.edu</a></em>.</p>
+<p>In the following, we detail some of <em>neuromorphr</em>’s functionality, and copy and paste some text from <a href="http://neuromorpho.org">neuromorpho.org</a> in order to fill you in on its database and outlook.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
+<p>Firstly, you will need R, R Studio and X Quartz as well as nat and its dependencies. For detailed installation instructions for all this, see <a href="https://jefferis.github.io/nat/articles/Installation.html">here</a>. It should not take too long at all. Then:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install</span>
 <span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"devtools"</span>)) <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"jefferislab/neuromorphr"</span>)
 
 <span class="co"># use </span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(neuromorphr)</code></pre></div>
+<p>Done!</p>
 </div>
 <div id="key-functions" class="section level2">
 <h2 class="hasAnchor">
@@ -127,18 +134,22 @@ devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/
 ?<span class="kw"><a href="reference/neuromorpho_get_article.html">neuromorpho_get_article</a></span>()
 
 <span class="co"># I heard something about persistence vectors, they're used to describe describe meaningful morphological features? Can I get those?</span>
-?neuromorpho_persistence_vectors</code></pre></div>
-<p>Each neuron in <a href="http://neuromorpho.org">neuromorpho.org</a> is represented by a name, general information (metadata) and a standardised <a href="http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html">SWC</a> file for the digital morphological reconstruction. Most neurons also have some basic measurements calculated, incluidng for example cable length, in micrometers, and volume, in micrometers cubed. The functions above can get you this information.</p>
+?neuromorpho_persistence_vectors
+
+<span class="co"># What about insectbrainDB.org?</span>
+?insectbraindb_read_neurons <span class="co"># Get neurons registered to a standard brainspace</span>
+?insectbraindb_read_brain <span class="co"># Get 3D neuropil-subdivided brain models for those brainspaces</span></code></pre></div>
+<p>Each neuron in <a href="http://neuromorpho.org">neuromorpho.org</a> is represented by a name, general information (metadata) and a standardised <a href="http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html">SWC</a> file for the digital morphological reconstruction. Most neurons also have some basic measurements calculated, including for example cable length, in micrometers, and volume, in micrometers cubed. The functions above can get you this information.</p>
 </div>
-<div id="example" class="section level2">
+<div id="neuromorpho-org-example" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<a href="#neuromorpho-org-example" class="anchor"></a>NeuroMorpho.org Example</h2>
 <p>Here is a quick example for reading some neocortical rat, elephant and whale neurons; plotting them and comparing them:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let's get neocortical neurons from both the African elephant, the humpback whale and the rat</span>
 neocortex.df =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_search.html">neuromorpho_search</a></span>(<span class="dt">search_terms=</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"species:elephant,humpback whale,rat"</span>, <span class="st">"brain_region:neocortex"</span>))
 
 ## Pull measurements, in a data frame
-measurements =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_morphometry.html">neuromorpho_morphometry</a></span>(neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">100</span>, <span class="dt">data_frame =</span> <span class="ot">TRUE</span>)
+measurements =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_morphometry.html">neuromorpho_morphometry</a></span>(neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">data_frame =</span> <span class="ot">TRUE</span>)
  
 ## Assign species column
 measurements<span class="op">$</span>species =<span class="st"> </span>neocortex.df[<span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(measurements),<span class="st">"species"</span>]
@@ -154,13 +165,69 @@ measurements<span class="op">$</span>species =<span class="st"> </span>neocortex
       <span class="dt">main=</span><span class="st">"neocortical neuron volumes"</span>, <span class="dt">xlab=</span><span class="st">"species"</span>)
 
 ## Read neurons
-pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">100</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)
+pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)
 
 ## Plot 3D
 <span class="kw">plot3d</span>(pyramidal.cells, <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(species))</code></pre></div>
-<p>In blue, elephant, red, whale and black, rat, cortical neurons:</p>
+<p>Here’s a subset. In red, elephant, and in blue, whale, cortical pyramidal neurons:</p>
 <div class="figure">
-<img src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png" alt="elephant,whale,mouse neurons"><p class="caption">elephant,whale,mouse neurons</p>
+<img src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png" alt="3dneurons"><p class="caption">3dneurons</p>
+</div>
+</div>
+<div id="insectbraindb-org-example" class="section level2">
+<h2 class="hasAnchor">
+<a href="#insectbraindb-org-example" class="anchor"></a>insectbraindb.org Example</h2>
+<p>Let’s also have a look at an example pulling neurons and brain meshes from <a href="https://insectbraindb.org/app/">insectbraindb.org</a>. Here we shall take a look at neurons from the brain of the Monarch butterlfy that have been registered to a template brain. Excitingly, we can also visualise this template brain.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## What neurons does the insectbraindb.org host?
+available.neurons =<span class="st"> </span><span class="kw"><a href="reference/insectbraindb_info.html">insectbraindb_neuron_info</a></span>()
+
+## Let's just download all of the neurons in the database to play with,
+## there are not very many:
+<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(available.neurons)
+
+## First, we call the read neurons function, with ids set to NULL
+insect.neurons =<span class="st"> </span><span class="kw"><a href="reference/insectbraindb_read_neurons.html">insectbraindb_read_neurons</a></span>(<span class="dt">ids =</span> <span class="ot">NULL</span>)
+
+## Hmm, let's see how many neurons we have perspecies
+<span class="kw"><a href="https://rdrr.io/r/base/table.html">table</a></span>(insect.neurons[,<span class="st">"common_name"</span>])
+
+## So, it seem the Monarch Butterfly is the clear winner there, 
+## maybe let's just have those
+butterfly.neurons =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(insect.neurons, common_name <span class="op">==</span><span class="st"> "Monarch Butterfly"</span>)
+
+## And let's plot them
+nat<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/nat/man/nopen3d.html">nopen3d</a></span>(<span class="dt">userMatrix =</span> <span class="kw"><a href="https://rdrr.io/r/base/structure.html">structure</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.999986588954926</span>, <span class="op">-</span><span class="fl">0.00360279157757759</span>, 
+<span class="op">-</span><span class="fl">0.00371213257312775</span>, <span class="dv">0</span>, <span class="op">-</span><span class="fl">0.00464127957820892</span>, <span class="op">-</span><span class="fl">0.941770493984222</span>, 
+<span class="op">-</span><span class="fl">0.336223870515823</span>, <span class="dv">0</span>, <span class="op">-</span><span class="fl">0.00228461623191833</span>, <span class="fl">0.336236596107483</span>, 
+<span class="op">-</span><span class="fl">0.941774606704712</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">.Dim =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(4L, 4L)), <span class="dt">zoom =</span> <span class="fl">0.600000023841858</span>, 
+    <span class="dt">windowRect =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(1460L, 65L, 3229L, 1083L))
+<span class="kw">plot3d</span>(butterfly.neurons, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">soma =</span> <span class="dv">5</span>)
+
+## Cool! But maybe we also want to see it's template brain? 
+## Let's check if they have it
+available.brains =<span class="st"> </span><span class="kw"><a href="reference/insectbraindb_info.html">insectbraindb_species_info</a></span>()
+available.brains
+
+## Great, they do, let's get it
+butterfly.brain =<span class="st"> </span><span class="kw"><a href="reference/insectbraindb_read_brain.html">insectbraindb_read_brain</a></span>(<span class="dt">species =</span> <span class="st">"Danaus plexippus"</span>)
+
+## And plot in a translucent manner
+<span class="kw">plot3d</span>(butterfly.brain, <span class="dt">alpha =</span> <span class="fl">0.1</span>)
+
+## Oop, that's a lot of neuropils. 
+## Let's go for only a subset. What's available?
+butterfly.brain<span class="op">$</span>RegionList
+butterfly.brain<span class="op">$</span>neuropil_full_names
+
+## There lateral horn (LH) and the antennal lobe (AL) are my favourites.
+## Let's plot those
+<span class="kw">clear3d</span>()
+<span class="kw">plot3d</span>(<span class="kw"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(butterfly.brain, <span class="st">"LH|AL"</span>), <span class="dt">alpha =</span> <span class="fl">0.5</span>)
+<span class="kw">plot3d</span>(butterfly.neurons, <span class="dt">lwd =</span> <span class="dv">2</span>, <span class="dt">soma =</span> <span class="dv">5</span>)
+
+### Ffff, doesn't look like we have any neurons in my favourite neuropils :(</code></pre></div>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/butterfly_brain_neurons.png" alt="butterfly_brain_neurons"><p class="caption">butterfly_brain_neurons</p>
 </div>
 </div>
 <div id="submit-to-neuromorpho-org" class="section level2">
@@ -177,14 +244,15 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
 <div id="acknowledging-the-data-and-tools" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledging-the-data-and-tools" class="anchor"></a>Acknowledging the data and tools</h2>
-<p>The <a href="http://neuromorpho.org">neuromorpho.org</a> has a <a href="http://neuromorpho.org/useterm.jsp">terms of use</a>, which proviides guidance on how best to credit This package was created by Alexander Bates, while in the group of <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Dr. Gregory Jefferis</a>. You can cite this package as:</p>
+<p>The <a href="http://neuromorpho.org">neuromorpho.org</a> has a <a href="http://neuromorpho.org/useterm.jsp">terms of use</a>, as does the <a href="https://insectbraindb.org/app/terms">insectbraindb.org</a>, which provides guidance on how best to credit data from these repositories. Most neurons have an associated publication that you can fidn using this package or directly on tthe repositroy websites.</p>
+<p>This package was created by Alexander Bates, while in the group of <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Dr. Gregory Jefferis</a>. You can cite this package as:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="dt">package =</span> <span class="st">"neuromorphr"</span>)</code></pre></div>
-<p><strong>Bates AS</strong> (2019). <em>neuromorphr: R client utilities for interacting with the neuromorpho.org repository.</em> <strong>R package</strong> version 0.1.0. <a href="https://github.com/jefferislab/neuromorphr" class="uri">https://github.com/jefferislab/neuromorphr</a></p>
+<p><strong>Bates AS</strong> (2019). <em>neuromorphr: R client utilities for interacting with neuron morphology repositories.</em> <strong>R package</strong> version 0.1.0. <a href="https://github.com/jefferislab/neuromorphr" class="uri">https://github.com/jefferislab/neuromorphr</a></p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#acknowledgements" class="anchor"></a>Acknowledgements</h2>
-<p><a href="http://neuromorpho.org">neuromorpho.org</a> was started and is maintained by the Computational Neuroanatomy Group at the Krasnow Institute for Advanced Study, George Mason University, under the direction of Prof. Giorgio Ascoli, PhD. This project is part of a consortium for the creation of a “Neuroscience Information Framework,” endorsed by the Society for Neuroscience, funded by the National Institutes of Health, led by Cornell University (Dr. Daniel Gardner), and including numerous academic institutions such as Yale University (Dr. Gordon Shepherd), Stanford University (Dr. Paul Sternberg), and University of California, San Diego (Dr. Maryann Martone). The <a href="http://neuromorpho.org">neuromorpho.org</a> mission statement can be found <a href="http://neuromorpho.org/about.jsp">here</a>.</p>
+<p><a href="http://neuromorpho.org">neuromorpho.org</a> was started and is maintained by the Computational Neuroanatomy Group at the Krasnow Institute for Advanced Study, George Mason University, under the direction of Prof. Giorgio Ascoli, PhD. This project is part of a consortium for the creation of a “Neuroscience Information Framework,” endorsed by the Society for Neuroscience, funded by the National Institutes of Health, led by Cornell University (Dr. Daniel Gardner), and including numerous academic institutions such as Yale University (Dr. Gordon Shepherd), Stanford University (Dr. Paul Sternberg), and University of California, San Diego (Dr. Maryann Martone). The <a href="http://neuromorpho.org">neuromorpho.org</a> mission statement can be found <a href="http://neuromorpho.org/about.jsp">here</a>. The <a href="https://insectbraindb.org/app/">insectbraindb.org</a> is primarily curated by <a href="https://www.biology.lu.se/stanley-heinze">Dr. Stanley Heinze</a>, and was buily by <a href="https://tedore.com/">Kevin Tedore</a>, and has several significant <a href="https://insectbraindb.org/app/">supporters</a>, including the ERC.</p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
@@ -222,6 +290,7 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
 <h2>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/jefferislab/neuromorphr"><img src="https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://codecov.io/github/jefferislab/neuromorphr?branch=master"><img src="https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="http://jefferislab.github.io/neuromorphr/reference/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a></li>
 </ul>
 </div>
