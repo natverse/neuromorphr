@@ -6,12 +6,12 @@
 \usage{
 
   insectbraindb_read_brain(species = insectbraindb_species_info()$scientific_name,
-  sex = c("UNKNOWN", "MALE", "FEMALE"), progress = TRUE)
+  brain.sex = c("UNKNOWN", "MALE", "FEMALE"), progress = TRUE)
 }
 \arguments{
 \item{species}{the full scientific name for a species. The available options can be seen \href{https://insectbraindb.org/app/species}{here}}
 
-\item{sex}{the sex of the species' brain. The available options can be seen \href{https://insectbraindb.org/app/species}{here}}
+\item{brain.sex}{the sex of the species' brain. The available options can be seen \href{https://insectbraindb.org/app/species}{here}}
 
 \item{progress}{if \code{TRUE} or a numeric value, a progress bar is shown to track the state of your download}
 }
