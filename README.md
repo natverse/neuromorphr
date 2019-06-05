@@ -13,6 +13,8 @@ In the following, we detail some of *neuromorphr*'s functionality, and copy and 
 Installation
 ------------
 
+Firstly, you will need R, R Studio and X Quartz as well as nat and its dependencies. For detailed installation instructions for all this, see [here](https://jefferis.github.io/nat/articles/Installation.html). It should not take too long at all. Then:
+
 ``` r
 # install
 if (!require("devtools")) install.packages("devtools")
@@ -21,6 +23,8 @@ devtools::install_github("jefferislab/neuromorphr")
 # use 
 library(neuromorphr)
 ```
+
+Done!
 
 Key Functions
 -------------
@@ -116,7 +120,7 @@ table(insect.neurons[,"common_name"])
 butterfly.neurons = subset(insect.neurons, common_name == "Monarch Butterfly")
 
 ## And let's plot them
-nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759, 
+nat::nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759, 
 -0.00371213257312775, 0, -0.00464127957820892, -0.941770493984222, 
 -0.336223870515823, 0, -0.00228461623191833, 0.336236596107483, 
 -0.941774606704712, 0, 0, 0, 0, 1), .Dim = c(4L, 4L)), zoom = 0.600000023841858, 
@@ -137,7 +141,7 @@ plot3d(butterfly.brain, alpha = 0.1)
 ## Oop, that's a lot of neuropils. 
 ## Let's go for only a subset. What's available?
 butterfly.brain$RegionList
-butterfly.brain$full_names
+butterfly.brain$neuropil_full_names
 
 ## There lateral horn (LH) and the antennal lobe (AL) are my favourites.
 ## Let's plot those

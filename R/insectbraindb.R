@@ -79,7 +79,7 @@
 #' ## Oop, that's a lot of neuropils. 
 #' ## Let's go for only a subset. What's available?
 #' butterfly.brain$RegionList
-#' butterfly.brain$full_names
+#' butterfly.brain$neuropil_full_names
 #' 
 #' # There lateral horn (LH) and the antennal lobe (AL) are my favourites.
 #' # Let's plot those
@@ -115,7 +115,7 @@ insectbraindb_read_neurons <- function(ids = NULL, progress = TRUE){
     pub = unlist(neuron_info[[1]]$data$publications)
     ndf = data.frame(id = id,
                      short_name = changenull(neuron_info[[1]]$data$short_name),
-                     full_name = changenull(neuron_info[[1]]$data$full_name),
+                     neuropil_full_name = changenull(neuron_info[[1]]$data$full_name),
                      scientific_name = changenull(neuron_info[[1]]$data$species$scientific_name),
                      common_name = changenull(neuron_info[[1]]$data$species$common_name),
                      sex = changenull(neuron_info[[1]]$data$sex),
@@ -163,7 +163,7 @@ insectbraindb_read_neurons <- function(ids = NULL, progress = TRUE){
 #' object, which mimics the Amira surface format. These can be be plotted in 3D using \code{rgl} and analysed with tools from the \code{nat} ecosystem.
 #' This incldue subseting by neuropil, i.e.. if you only want to visualise or analyse the antennal lobe.
 #' @param species the full scientific name for a species. The available options can be seen \href{https://insectbraindb.org/app/species}{here}
-#' @param sex the sex of the species' brain. The available options can be seen \href{https://insectbraindb.org/app/species}{here}
+#' @param brain.sex the sex of the species' brain. The available options can be seen \href{https://insectbraindb.org/app/species}{here}
 #' @param progress if \code{TRUE} or a numeric value, a progress bar is shown to track the state of your download 
 #' @details A single 3D brain object is read, a .obj file for each of its neuropils is downloaded from https://ibdb-file-storage.s3.amazonaws.com/
 #'  to a temporary directory, and read using \code{\link[readobj]{read.obj}} into a
@@ -195,10 +195,10 @@ insectbraindb_read_neurons <- function(ids = NULL, progress = TRUE){
 #' @export
 #' @rdname insectbraindb_read_brain
 insectbraindb_read_brain <- function(species = insectbraindb_species_info()$scientific_name,
-                                     sex = c("UNKNOWN", "MALE", "FEMALE"),
+                                     brain.sex = c("UNKNOWN", "MALE", "FEMALE"),
                                      progress = TRUE){
   species = match.arg(species)
-  sex = match.arg(sex)
+  brain.sex = match.arg(brain.sex)
   db = insectbraindb_species_info()
   id = db[db$scientific_name==species,"id"]
   if(!length(id)){
@@ -215,7 +215,7 @@ insectbraindb_read_brain <- function(species = insectbraindb_species_info()$scie
   sexes  = c(tryCatch(brain_info$reconstructions[[1]]$sex, error = function(e) NA),
              tryCatch(brain_info$reconstructions[[2]]$sex, error = function(e) NA),
              tryCatch(brain_info$reconstructions[[3]]$sex, error = function(e) NA))
-  sex.index = match(sex, sexes)
+  sex.index = match(brain.sex, sexes)
   if(is.na(sex.index)){
     warning("No reconstruction for species ", species, " returning NULL")
     return(NULL)
@@ -227,17 +227,17 @@ insectbraindb_read_brain <- function(species = insectbraindb_species_info()$scie
                   }
   )
   if(!length(data)){
-    warning("No reconstruction for species ", species, " of sex ", sex, " returning NULL")
+    warning("No reconstruction for species ", species, " of sex ", brain.sex, " returning NULL")
     return(NULL)
   }
   paths = hemispheres = structure.names = structure.shorts = structure.colors = sex = c()
   for(d in data){
     sex = c(sex, d$sex)
     paths = c(paths, d$p_file$path)
-    hemispheres = c(hemispheres, changenull(d$structures[[1]]$hemisphere))
-    structure.names = c(structure.names, d$structures[[1]]$structure$name)
-    structure.shorts = c(structure.shorts, d$structures[[1]]$structure$abbreviation)
-    structure.colors = c(structure.colors, d$structures[[1]]$structure$color)
+    hemispheres = c(hemispheres, changenull(d$structures[[1]]$hemisphere, to = "noside"))
+    structure.names = c(structure.names, changenull(d$structures[[1]]$structure$name, to = "ambiguous"))
+    structure.shorts = c(structure.shorts, changenull(d$structures[[1]]$structure$abbreviation, to = "AMBIG"))
+    structure.colors = c(structure.colors, changenull(d$structures[[1]]$structure$color, to = "grey"))
   }
   obj.name = paste(structure.shorts, hemispheres, 1:length(structure.shorts), sep = "_")
   obj.name = gsub("_$","",obj.name)
@@ -281,11 +281,11 @@ insectbraindb_read_brain <- function(species = insectbraindb_species_info()$scie
     count = count + nrow(o$Vertices)
     if(progress) neuromorpho_progress(i/length(objs)*100, max = 100, message = "assembling hxsurf object")
   }
-  brain$full_names = structure.names[success]
+  brain$neuropil_full_names = structure.names[success]
   brain$hemispheres = hemispheres[success]
   brain$scientific_name = meta["scientific_name"]
   brain$common_name = meta["common_name"]
-  brain$sex = sex[success]
+  brain$sex = brain.sex
   brain$id = meta["id"]
   brain$host_lab = meta["host_lab"]
   brain$description = meta["description"]

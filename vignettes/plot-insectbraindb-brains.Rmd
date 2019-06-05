@@ -58,19 +58,25 @@ for(insect in insect.species){
   message("Pulling ", insect, " brain mesh")
   for(sex in c("UNKNOWN", "MALE", "FEMALE")){
     message(sex)
-    insect.brain = insectbraindb_read_brain(species = insect, sex  = sex, progress = TRUE)
+    insect.brain = insectbraindb_read_brain(species = insect, brain.sex  = sex, progress = TRUE)
     insect.sex = paste(insect, sex, sep = " ")
-  }
-  if(!is.null(insect.brain)){
-    insect.brains[[insect.sex]] = insect.brain  
+    if(!is.null(insect.brain)){
+      insect.brains[[insect.sex]] = insect.brain
+    }
   }
 }
 # You will notice that we failed to read two brains there. It seems there is no reconstruction yet for Bombus terrestris, and that the Helicoverpa armigera requires a user with an account on insectbraindb.org 
 
+# Because you donwload .obj files to the same temporary directory, which persists as long as the R session, re-reading the same brain again is quicker - because you have already downloaded the underlying files! Try re-running the above code in your R console to see (Markdown behaviour can be different).
+
 # Let's also chuck in a Drosophila melanogaster brain for good measure 
 if(!require('devtools')) install.packages("devtools")
 if(!require('nat.flybrains')) devtools::install_github("jefferislab/nat.flybrains")
-insect.brains[["Drosophila melanogaster UNKNOWN"]] = nat.flybrains::JFRC2NP.surf
+JFRC2NP.surf = nat.flybrains::JFRC2NP.surf
+JFRC2NP.surf$scientific_name = "Drosophila melanogaster"
+JFRC2NP.surf$common_name = "Vinegar fly" # Not fruit fly
+JFRC2NP.surf$sex = "UNKNOWN" # Actually, it is intersex
+insect.brains[["Drosophila melanogaster UNKNOWN"]] = JFRC2NP.surf
 # It is the best of the insects after all
 ```
 
@@ -93,18 +99,21 @@ for(ib in insect.brains){
 }
 ```
 
-## Plot lateral horns
+## Plot antennal lobes
 
 We can also subset these brains by a particular brain area. Everyone likes the antennal lobe, maybe it's the best studied bit of insect neuro-anatomy. So let's have a gander at that.
 
 ```{r plot.3d.antennal.lobe, eval = FALSE}
 # Let's have a look at how standardised the neuropil names are, across these species
-neuropils = lapply(insect.brains, function(brain) sort(brain$full_names))
-neuropils[[1]]
-# Brains that contain a lateral horn neuropil object
-with.al = sapply(insect.brains, function(ib) sum(grepl("Antennal", ib$full_names))>0)
+neuropils = lapply(insect.brains, function(brain) sort(brain$neuropil_full_names))
+als = sapply(neuropils, function(np) "Antennal Lobe"%in%np)
+als
+# Okay, so we have it in all, and indeed it has a capital A and a capital L
+
+# Brains that contain a antennal lobe neuropil object
+with.al = sapply(insect.brains, function(ib) sum(grepl("^Antennal Lobe$", ib$neuropil_full_names))>0)
 insect.brains.with.al = insect.brains[with.al]
-insect.brains.with.al[["Drosophila melanogaster"]] = nat.flybrains::JFRC2NP.surf
+insect.brains.with.al[["Drosophila melanogaster"]] = JFRC2NP.surf # Got dropped out, as it does not have all the entries of a insectbraindb read brain
 
 # Hold right click to pan
 nat::nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759, 
@@ -115,11 +124,13 @@ nat::nopen3d(userMatrix = structure(c(0.999986588954926, -0.00360279157757759,
 for(ib in insect.brains.with.al){
   clear3d()
   message(ib$scientific_name, " the ", ib$common_name)
-  plot3d(subset(ib, "AL"), col = "red")
-  plot3d(ib, col = "lightgrey", alpha = 0.3)
+  plot3d(subset(ib, "^AL_left|^AL_right|^AL_noside|^AL_R$|^AL_L$"), col = "red")
+  #plot3d(ib, col = "lightgrey", alpha = 0.3)
   progress = readline(prompt = "Press any key for next brain ... ")
 }
 ```
+
+## Comparing neuropils
 
 Fab. Now what we really might like to know if how the volume of the antennal lobe differs across species. So let's put our analysis hat on and take a look at that.
 
@@ -144,17 +155,118 @@ calculate_volume <- function(brain, neuropil = NULL, alpha = 30){
 insect.brain.volumes = pbapply::pbsapply(insect.brains.with.al, calculate_volume, neuropil = NULL)
 
 # Get the volumes for just the antennal lobe
-insect.al.volumes = pbapply::pbsapply(insect.brains.with.al, calculate_volume, neuropil = "AL|AL_|AL_right|AL_left")
+insect.al.volumes = pbapply::pbsapply(insect.brains.with.al, calculate_volume, neuropil = "^AL_left|^AL_right|^AL_noside|^AL_R$|^AL_L$")
 
 # Hmm, that took a while
 ```
 
 We can then use the wonderful ggplot2 package to visualise this data
 
-```{r ggplot2.volumes, eval = FALSE}
+```{r ggplot2.al.volumes, eval = FALSE}
+# Assemble data.frame
+species.with.al = sapply(insect.brains.with.al, function(x) x$common_name)
+sex.with.al = unlist(sapply(insect.brains.with.al, function(x) x$sex[[1]]))
+df = data.frame(species = c(species.with.al, species.with.al),
+                sex = c(sex.with.al, sex.with.al),
+                volume = c(insect.brain.volumes, insect.al.volumes),
+                neuropil = c(rep("whole",length(insect.brain.volumes)),rep("AL",length(insect.al.volumes)))
+)
+
+# Plot!
+if(!require('ggplot2')) install.packages("ggplot2")
+ggplot2::ggplot(df, aes(x=species, y=volume, color = neuropil, group = neuropil, shape=sex)) +
+  geom_jitter(position=position_dodge(0.2))+
+  theme_classic()
+
+# Hmm, let's see total brain volume against antennal lobe volume
+df2 = data.frame(species = species.with.al,
+                sex = sex.with.al,
+                volume = insect.brain.volumes,
+                al.volume = insect.al.volumes
+)
+ggplot2::ggplot(df2, aes(x=volume, y=al.volume, color = species)) +
+  geom_point() + 
+  geom_smooth(data = df2, aes(x=volume, y=al.volume, color = "black"), method=lm, se = FALSE)+
+  theme_classic()
+```
+
+Also note, that some of these brains, such as that for Agrotis segetum, are not actually complete seemingly.
+
+It is hard to interpret this sort of result. Perhaps we are better served by trying to see an olfactory - vision trade-off, and sompare the AL size with the size of the optic lobes? The optic lobes are a bit more complicated, the consist of:
+
+  - Accessory medulla
+  - Dorsal rim medulla
+  - Lamina
+  - Accessory lamina
+  - Dorsal lamina
+  - Ventral lamina
+  - Lobula complex
+  - Anterior lobula
+  - Dorsal lobula
+  - Inner lobula
+  - Lobula
+  - Lobula plate
+  - Outer lobula
+  - Medulla
+  - Inner medulla
+  - Outer medulla
+
+So a bit more complicated. But to be fair, the antennal lobe has plenty of glomeruli (~50 in Drosophila, >500 in ants) and those are not drawn out in these brain models.
+
+```{r optic.volumes, eval = FALSE}
+# Which insects have which major optic neuropils?
+lamina = sapply(neuropils, function(np) sum(grepl("Lamina", np)))
+lamina
+lobula = sapply(neuropils, function(np) sum(grepl("Lobula", np)))
+lobula
+medulla = sapply(neuropils, function(np) sum(grepl("Medulla", np)))
+medulla
+# Looks like the lamina is missing from many of these brains. We'll combine lobula and medulla volumes for our calculation
+
+# Brains that contain a optic lobe neuropil objects, though not necessarily all of them
+with.optic = sapply(insect.brains, function(ib) sum(grepl("^Lobula|^Medulla", ib$neuropil_full_names))>0)
+insect.brains.with.optic = insect.brains[with.optic]
+
+# Calculate the neuropil volumes
+insect.optic.volumes = pbapply::pbsapply(insect.brains.with.optic, function(x)
+  calculate_volume(subset(x, x$RegionList[grepl("^Lobula|^Medulla",x$neuropil_full_names)]))
+)
+
+# And out friend, Drosophila melanogaster
+insect.brains.with.optic[["Drosophila melanogaster"]] = JFRC2NP.surf # Got dropped out, as it does not have all the entries of a insectbraindb read brain
+insect.optic.volumes[["Drosophila melanogaster"]] = calculate_volume(subset(JFRC2NP.surf, "LOP_|ME_|LO_"), alpha = 3)
 
 ```
 
+And let's try plotting again with Ggplot2
 
+
+```{r ggplot2.volumes, eval = FALSE}
+# Assemble data.frame
+species.with.optic = sapply(insect.brains.with.optic, function(x) x$common_name)
+sex.with.optic = unlist(sapply(insect.brains.with.optic, function(x) x$sex[[1]]))
+df3 = data.frame(species = species.with.optic,
+                al.volume = insect.al.volumes[names(insect.optic.volumes)],
+                optic.volume = insect.optic.volumes
+                )
+
+# Plot!
+ggplot2::ggplot(df3, aes(x=optic.volume, y=al.volume, color = species)) +
+  geom_point() + 
+  geom_smooth(data = df3, aes(x=optic.volume, y=al.volume), color  ="black", method=lm, se = FALSE)+
+  theme_classic()
+
+# Maybe we should normalise by total brain volume?
+df4 = data.frame(species = species.with.optic,
+                al.norm.volume = insect.al.volumes[names(insect.optic.volumes)]/insect.brain.volumes[names(insect.optic.volumes)],
+                optic.norm.volume = insect.optic.volumes/insect.brain.volumes[names(insect.optic.volumes)]
+                )
+ggplot2::ggplot(df4, aes(x=optic.norm.volume, y=al.norm.volume, color = species)) +
+  geom_point() + 
+  geom_smooth(data = df4, aes(x=optic.norm.volume, y=al.norm.volume), color = "black", method=lm, se = FALSE)+
+  theme_classic()
+```
+
+Those budworms really skew things!
 
 Of course, to be sure, we would need to control by reconstruction method and work harder to establish the exact cell type correspondences.

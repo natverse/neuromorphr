@@ -27,7 +27,7 @@ object, which mimics the Amira surface format. These can be be plotted in 3D usi
 This incldue subseting by neuropil, i.e.. if you only want to visualise or analyse the antennal lobe.
 }
 \details{
-A single 3D brain object is read, a .obj file for each of its neuropils is downloaded from "https://ibdb-file-storage.s3.amazonaws.com/"
+A single 3D brain object is read, a .obj file for each of its neuropils is downloaded from https://ibdb-file-storage.s3.amazonaws.com/
  to a temporary directory, and read using \code{\link[readobj]{read.obj}} into a
  \code{\link[nat]{hxsurf}} object in R, which mimics the Amira surface format.
  As of May 2019, data from the following \href{https://insectbraindb.org/app/species}{species} is hosted on insectbraindb.org :
@@ -88,7 +88,7 @@ plot3d(butterfly.brain, alpha = 0.1)
 ## Oop, that's a lot of neuropils. 
 ## Let's go for only a subset. What's available?
 butterfly.brain$RegionList
-butterfly.brain$full_names
+butterfly.brain$neuropil_full_names
 
 # There lateral horn (LH) and the antennal lobe (AL) are my favourites.
 # Let's plot those

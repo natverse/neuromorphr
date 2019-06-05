@@ -93,7 +93,7 @@ plot3d(butterfly.brain, alpha = 0.1)
 ## Oop, that's a lot of neuropils. 
 ## Let's go for only a subset. What's available?
 butterfly.brain$RegionList
-butterfly.brain$full_names
+butterfly.brain$neuropil_full_names
 
 # There lateral horn (LH) and the antennal lobe (AL) are my favourites.
 # Let's plot those
