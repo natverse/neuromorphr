@@ -128,5 +128,5 @@ References
 **Ascoli GA, Donohue DE, Halavi M.** (2007) *NeuroMorpho.Org: a central resource for neuronal morphologies.* **J Neurosci.**, 27(35):9247-51
 
 <p align="center">
-<img width="300px" src="https://raw.githubusercontent.com/natverse/jefferislab/master/inst/images/hex-natverse_logo.png"/>
+<img width="300px" src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/hex-natverse_logo.png"/>
 </p>
