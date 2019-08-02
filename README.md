@@ -1,5 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Coverage status](https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg)](https://codecov.io/github/jefferislab/neuromorphr?branch=master) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/)
+[![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Coverage status](https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg)](https://codecov.io/github/jefferislab/neuromorphr?branch=master) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/) <img align="right" width="300px" src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/hex-neuromorphr.png">
 
 neuromorphr
 ===========
@@ -126,3 +126,7 @@ References
 **Ascoli GA** (2006) *Mobilizing the base of neuroscience data: the case of neuronal morphologies*. **Nature Rev. Neurosci.**, 7:318-324
 
 **Ascoli GA, Donohue DE, Halavi M.** (2007) *NeuroMorpho.Org: a central resource for neuronal morphologies.* **J Neurosci.**, 27(35):9247-51
+
+<p align="center">
+<img width="300px" src="https://raw.githubusercontent.com/natverse/jefferislab/master/inst/images/hex-natverse_logo.png"/>
+</p>
