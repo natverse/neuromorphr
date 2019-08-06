@@ -6,7 +6,7 @@ Authors@R: c(
     person("Alexander", "Bates", email = "alexander.shakeel.bates@gmail.com", role = c("aut", "cre"), 
     comment = c(ORCID = "0000-0002-1195-0445"))
     )
-Description: Access to the NeuroMorpho.org repository (version 7.7 ) and several other single-cell neuron databases, enabling users to easily find and use neurons in this repository with nat family packages.
+Description: Access to the NeuroMorpho online repository (version 7.7 ) for single-cell neuron morphology data, enabling users to easily find and use neurons from this repository with nat family packages.
     NeuroMorpho.org is a centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. 
     It is continuously updated as new morphological reconstructions are collected, published, and shared. 
     To date, neuromorpho.org is the largest collection of publicly accessible 3D neuronal reconstructions and associated metadata.
