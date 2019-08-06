@@ -1,6 +1,6 @@
 Package: neuromorphr
 Type: Package
-Title: R client utilities for interacting with the NeuroMorpho.org repository
+Title: R client utilities for interacting with the NeuroMorpho online repository for neuron morphology data
 Version: 0.1.0
 Authors@R: c(
     person("Alexander", "Bates", email = "alexander.shakeel.bates@gmail.com", role = c("aut", "cre"), 
