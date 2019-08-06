@@ -39,11 +39,11 @@ neuromorpho_is_api_healthy()
 ?neuromorphr_read_neurons()
 
 # But first I need neuron names and/or neuron IDs, how do I get those?
-?neuprint_search()
+?neuromorpho_search()
 
 # I see, so what metadata do I get with my neurons?
-?neuprint_neurons_info()
-?neuprint_neurons_meta()
+?neuromorpho_neurons_info()
+?neuromorpho_neurons_meta()
 
 # Interesting, I see a pubmed ID (pmid) is also given. Can I find the scientific artices that describe these neurons?
 ?neuromorpho_articles_from_neurons()
