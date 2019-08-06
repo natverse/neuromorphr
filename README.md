@@ -1,10 +1,8 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-[![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.github.io) [![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Coverage status](https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg)](https://codecov.io/github/jefferislab/neuromorphr?branch=master) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/) <img align="right" width="300px" src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/hex-neuromorphr.png">
+[![natverse](https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6)](https://natverse.github.io) [![Travis-CI Build Status](https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master)](https://travis-ci.org/jefferislab/neuromorphr) [![Coverage status](https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg)](https://codecov.io/github/jefferislab/neuromorphr?branch=master) [![Docs](https://img.shields.io/badge/docs-100%25-brightgreen.svg)](http://jefferislab.github.io/neuromorphr/reference/) <img src="man/figures/logo.svg" align="right" height="139" />
 
 neuromorphr
 ===========
-
-<img src="man/figures/logo.svg" align="right" height="139" />
 
 The goal of *neuromorphr* is to provide R client utilities for interacting with the [API](http://neuromorpho.org/api.jsp) for [neuromorpho.org](http://neuromorpho.org). The site [neuromorpho.org](http://neuromorpho.org) is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many [here](http://neuromorpho.org/acknowl.jsp)). To date, [neuromorpho.org](http://neuromorpho.org) is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with version 7.7 of [neuromorpho.org](http://neuromorpho.org).
 
