@@ -7,8 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>R client utilities for interacting with the NeuroMorpho online repository for neuron morphology data • neuromorphr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R client utilities for interacting with the NeuroMorpho online repository for neuron morphology data">
 <meta property="og:description" content="Access to the NeuroMorpho online repository (version 7.7 ) for single-cell neuron morphology data, enabling users to easily find and use neurons from this repository with nat family packages.
@@ -44,7 +43,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -69,8 +68,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jefferislab/neuromorphr">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/natverse/neuromorphr">
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -90,79 +89,79 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<p><a href="https://natverse.github.io"><img src="https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6" alt="natverse"></a> <a href="https://travis-ci.org/jefferislab/neuromorphr"><img src="https://api.travis-ci.org/jefferislab/neuromorphr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/jefferislab/neuromorphr?branch=master"><img src="https://codecov.io/gh/jefferislab/neuromorphr/branch/master/graph/badge.svg" alt="Coverage status"></a> <a href="http://jefferislab.github.io/neuromorphr/reference/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a> <img src="reference/figures/logo.svg" align="right" height="139"></p>
+<p><a href="https://natverse.github.io"><img src="https://img.shields.io/badge/natverse-Part%20of%20the%20natverse-a241b6" alt="natverse"></a> <a href="https://travis-ci.org/jefferislab/neuromorphr"><img src="https://api.travis-ci.org/natverse/neuromorphr.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://codecov.io/github/jefferislab/neuromorphr?branch=master"><img src="https://codecov.io/gh/natverse/neuromorphr/branch/master/graph/badge.svg" alt="Coverage status"></a> <a href="http://natverse.github.io/neuromorphr/reference/"><img src="https://img.shields.io/badge/docs-100%25-brightgreen.svg" alt="Docs"></a> <img src="reference/figures/logo.svg" align="right" height="139"></p>
 <div id="neuromorphr" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#neuromorphr" class="anchor"></a>neuromorphr</h1></div>
 <p>The goal of <em>neuromorphr</em> is to provide R client utilities for interacting with the <a href="http://neuromorpho.org/api.jsp">API</a> for <a href="http://neuromorpho.org">neuromorpho.org</a>. The site <a href="http://neuromorpho.org">neuromorpho.org</a> is a well-known centrally curated inventory of digitally reconstructed neurons associated with peer-reviewed publications. It is continuously updated as new morphological reconstructions are collected, published and shared. It contains contributions from hundreds of laboratories worldwide (see many <a href="http://neuromorpho.org/acknowl.jsp">here</a>). To date, <a href="http://neuromorpho.org">neuromorpho.org</a> is the largest collection of publicly accessible 3D neuronal reconstructions (&gt;100,000) and associated metadata which can be used for detailed single cell simulations. This R package was built to work with version 7.7 of <a href="http://neuromorpho.org">neuromorpho.org</a>.</p>
-<p>If python is more your poison, there are a few python clients available, for example from <a href="https://github.com/BonsaiNet/Neuromorpho.org">BonsaiNet</a>. Using this R package in concert with the <a href="https://github.com/jefferis/nat">nat</a> ecosystem developed primarily by <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Gregory Jefferis</a> is highly recommended. The curators of <a href="http://neuromorpho.org">neuromorpho.org</a> can be contacted at <em><a href="mailto:nmadmin@gmu.edu">nmadmin@gmu.edu</a></em>.</p>
+<p>If python is more your poison, there are a few python clients available, for example from <a href="https://github.com/BonsaiNet/Neuromorpho.org">BonsaiNet</a>. Using this R package in concert with the <a href="https://github.com/jefferis/nat">nat</a> ecosystem developed primarily by <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Gregory Jefferis</a> is highly recommended. The curators of <a href="http://neuromorpho.org">neuromorpho.org</a> can be contacted at <em><a href="mailto:nmadmin@gmu.edu" class="email">nmadmin@gmu.edu</a></em>.</p>
 <p>In the following, we detail some of <em>neuromorphr</em>’s functionality, and copy and paste some text from <a href="http://neuromorpho.org">neuromorpho.org</a> in order to fill you in on its database and outlook.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Firstly, you will need R, R Studio and X Quartz as well as nat and its dependencies. For detailed installation instructions for all this, see <a href="https://jefferis.github.io/nat/articles/Installation.html">here</a>. It should not take too long at all. Then:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install</span>
-<span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span>(<span class="st">"devtools"</span>)) <span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"jefferislab/neuromorphr"</span>)
-
-<span class="co"># use </span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(neuromorphr)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(<span class="st">"devtools"</span>)) <span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"natverse/neuromorphr"</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co"># use </span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(neuromorphr)</a></code></pre></div>
 <p>Done!</p>
 </div>
 <div id="key-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#key-functions" class="anchor"></a>Key Functions</h2>
 <p>Now we can have a look at what is available, here are some of the key functions. Their help details examples of their use. You can summon the help in RStudio using <code>?</code> followed by the function name.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Sometimes neuromorphr.org can be slow, or down from capacity issues or have a faulty API. Can I check this?</span>
-<span class="kw"><a href="reference/neuromorpho_is_api_healthy.html">neuromorpho_is_api_healthy</a></span>()
-
-<span class="co"># And how can I read neurons from neuromorpho?</span>
-?<span class="kw">neuromorphr_read_neurons</span>()
-
-<span class="co"># But first I need neuron names and/or neuron IDs, how do I get those?</span>
-?<span class="kw"><a href="reference/neuromorpho_search.html">neuromorpho_search</a></span>()
-
-<span class="co"># I see, so what metadata do I get with my neurons?</span>
-?<span class="kw"><a href="reference/neuromorpho_neurons_info.html">neuromorpho_neurons_info</a></span>()
-?<span class="kw"><a href="reference/neuromorpho_neurons_meta.html">neuromorpho_neurons_meta</a></span>()
-
-<span class="co"># Interesting, I see a pubmed ID (pmid) is also given. Can I find the scientific artices that describe these neurons?</span>
-?<span class="kw"><a href="reference/neuromorpho_names_from_ids.html">neuromorpho_articles_from_neurons</a></span>()
-?<span class="kw"><a href="reference/neuromorpho_literature_search.html">neuromorpho_literature_search</a></span>()
-?<span class="kw"><a href="reference/neuromorpho_get_article.html">neuromorpho_get_article</a></span>()
-
-<span class="co"># I heard something about persistence vectors, they're used to describe describe meaningful morphological features? Can I get those?</span>
-?neuromorpho_persistence_vectors</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># Sometimes neuromorphr.org can be slow, or down from capacity issues or have a faulty API. Can I check this?</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/neuromorpho_is_api_healthy.html">neuromorpho_is_api_healthy</a></span>()</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># And how can I read neurons from neuromorpho?</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">?<span class="kw">neuromorphr_read_neurons</span>()</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># But first I need neuron names and/or neuron IDs, how do I get those?</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">?<span class="kw"><a href="reference/neuromorpho_search.html">neuromorpho_search</a></span>()</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co"># I see, so what metadata do I get with my neurons?</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">?<span class="kw"><a href="reference/neuromorpho_neurons_info.html">neuromorpho_neurons_info</a></span>()</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">?<span class="kw"><a href="reference/neuromorpho_neurons_meta.html">neuromorpho_neurons_meta</a></span>()</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co"># Interesting, I see a pubmed ID (pmid) is also given. Can I find the scientific artices that describe these neurons?</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">?<span class="kw"><a href="reference/neuromorpho_names_from_ids.html">neuromorpho_articles_from_neurons</a></span>()</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">?<span class="kw"><a href="reference/neuromorpho_literature_search.html">neuromorpho_literature_search</a></span>()</a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">?<span class="kw"><a href="reference/neuromorpho_get_article.html">neuromorpho_get_article</a></span>()</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co"># I heard something about persistence vectors, they're used to describe describe meaningful morphological features? Can I get those?</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">?neuromorpho_persistence_vectors</a></code></pre></div>
 <p>Each neuron in <a href="http://neuromorpho.org">neuromorpho.org</a> is represented by a name, general information (metadata) and a standardised <a href="http://www.neuronland.org/NLMorphologyConverter/MorphologyFormats/SWC/Spec.html">SWC</a> file for the digital morphological reconstruction. Most neurons also have some basic measurements calculated, including for example cable length, in micrometers, and volume, in micrometers cubed. The functions above can get you this information.</p>
 </div>
 <div id="example" class="section level2">
 <h2 class="hasAnchor">
 <a href="#example" class="anchor"></a>Example</h2>
 <p>Here is a quick example for reading some neocortical rat, elephant and whale neurons; plotting them and comparing them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let's get neocortical neurons from both the African elephant, the humpback whale and the rat</span>
-neocortex.df =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_search.html">neuromorpho_search</a></span>(<span class="dt">search_terms=</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"species:elephant,humpback whale,rat"</span>, <span class="st">"brain_region:neocortex"</span>))
-
-## Pull measurements, in a data frame
-measurements =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_morphometry.html">neuromorpho_morphometry</a></span>(neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">data_frame =</span> <span class="ot">TRUE</span>)
- 
-## Assign species column
-measurements<span class="op">$</span>species =<span class="st"> </span>neocortex.df[<span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(measurements),<span class="st">"species"</span>]
- 
-## Boxplot, neuron length
-<span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(length)<span class="op">~</span>species, <span class="dt">data=</span>measurements, <span class="dt">notch=</span><span class="ot">FALSE</span>, 
-      <span class="dt">col=</span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"deepskyblue1"</span>,<span class="st">"firebrick1"</span>, <span class="st">"darkolivegreen1"</span>)),
-      <span class="dt">main=</span><span class="st">"neocortical neuron lengths"</span>, <span class="dt">xlab=</span><span class="st">"species"</span>)
- 
-## Boxplot, neuron volume
-<span class="kw"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(volume)<span class="op">~</span>species, <span class="dt">data=</span>measurements, <span class="dt">notch=</span><span class="ot">FALSE</span>, 
-      <span class="dt">col=</span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"deepskyblue1"</span>,<span class="st">"firebrick1"</span>, <span class="st">"darkolivegreen1"</span>)),
-      <span class="dt">main=</span><span class="st">"neocortical neuron volumes"</span>, <span class="dt">xlab=</span><span class="st">"species"</span>)
-
-## Read neurons
-pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)
-
-## Plot 3D
-<span class="kw">plot3d</span>(pyramidal.cells, <span class="dt">col =</span> <span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(species))</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Let's get neocortical neurons from both the African elephant, the humpback whale and the rat</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">neocortex.df =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_search.html">neuromorpho_search</a></span>(<span class="dt">search_terms=</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"species:elephant,humpback whale,rat"</span>, <span class="st">"brain_region:neocortex"</span>))</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">## Pull measurements, in a data frame</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">measurements =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_morphometry.html">neuromorpho_morphometry</a></span>(neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">data_frame =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"> </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">## Assign species column</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">measurements<span class="op">$</span>species =<span class="st"> </span>neocortex.df[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(measurements),<span class="st">"species"</span>]</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"> </a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">## Boxplot, neuron length</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/boxplot">boxplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(length)<span class="op">~</span>species, <span class="dt">data=</span>measurements, <span class="dt">notch=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">      <span class="dt">col=</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"deepskyblue1"</span>,<span class="st">"firebrick1"</span>, <span class="st">"darkolivegreen1"</span>)),</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">      <span class="dt">main=</span><span class="st">"neocortical neuron lengths"</span>, <span class="dt">xlab=</span><span class="st">"species"</span>)</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"> </a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">## Boxplot, neuron volume</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/boxplot">boxplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(volume)<span class="op">~</span>species, <span class="dt">data=</span>measurements, <span class="dt">notch=</span><span class="ot">FALSE</span>, </a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">      <span class="dt">col=</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"deepskyblue1"</span>,<span class="st">"firebrick1"</span>, <span class="st">"darkolivegreen1"</span>)),</a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">      <span class="dt">main=</span><span class="st">"neocortical neuron volumes"</span>, <span class="dt">xlab=</span><span class="st">"species"</span>)</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">## Read neurons</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/neuromorpho_read_neurons.html">neuromorpho_read_neurons</a></span>(<span class="dt">neuron_name =</span> neocortex.df<span class="op">$</span>neuron_name, <span class="dt">batch.size =</span> <span class="dv">2</span>, <span class="dt">nat =</span> <span class="ot">TRUE</span>, <span class="dt">progress =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">## Plot 3D</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="kw">plot3d</span>(pyramidal.cells, <span class="dt">col =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(species))</a></code></pre></div>
 <p>Here’s a subset. In red, elephant, and in blue, whale, cortical pyramidal neurons:</p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/jefferislab/neuromorphr/master/inst/images/3dneurons.png" alt="3dneurons"><p class="caption">3dneurons</p>
@@ -173,7 +172,7 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
 <a href="#submit-to-neuromorpho-org" class="anchor"></a>Submit to neuromorpho.org</h2>
 <p>As well as using this package to interact with neuromorpho.org curated data, you can consider submitted your own neurons if you have been involved in lab work that has acquired 3D reconstructions. The submission process is very straightforward:</p>
 <ol style="list-style-type: decimal">
-<li>E-mail the reconstruction files (zipped, if possible) to: <em><a href="mailto:neuromorpho@gmail.com">neuromorpho@gmail.com</a></em>
+<li>E-mail the reconstruction files (zipped, if possible) to: <em><a href="mailto:neuromorpho@gmail.com" class="email">neuromorpho@gmail.com</a></em>
 </li>
 <li>Fill in as much information possible in the <a href="http://neuromorpho.org/about.jsp">Metadata Form</a> and include it in your e-mail</li>
 </ol>
@@ -184,7 +183,7 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
 <a href="#acknowledging-the-data-and-tools" class="anchor"></a>Acknowledging the data and tools</h2>
 <p>The <a href="http://neuromorpho.org">neuromorpho.org</a> has a <a href="http://neuromorpho.org/useterm.jsp">terms of use</a>, which provides guidance on how best to credit data from these repositories. Most neurons have an associated publication that you can fidn using this package or directly on tthe repositroy websites.</p>
 <p>This package was created by Alexander Bates, while in the group of <a href="https://en.wikipedia.org/wiki/Gregory_Jefferis">Dr. Gregory Jefferis</a>. You can cite this package as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="dt">package =</span> <span class="st">"neuromorphr"</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/citation">citation</a></span>(<span class="dt">package =</span> <span class="st">"neuromorphr"</span>)</a></code></pre></div>
 <p><strong>Bates AS</strong> (2019). <em>neuromorphr: R client utilities for interacting with neuron morphology repositories.</em> <strong>R package</strong> version 0.1.0. <a href="https://github.com/jefferislab/neuromorphr" class="uri">https://github.com/jefferislab/neuromorphr</a></p>
 </div>
 <div id="acknowledgements" class="section level2">
@@ -205,9 +204,9 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/jefferislab/neuromorphr">https://​github.com/​jefferislab/​neuromorphr</a>
+<li>Browse source code at <br><a href="https://github.com/natverse/neuromorphr">https://​github.com/​natverse/​neuromorphr</a>
 </li>
-<li>Report a bug at <br><a href="https://github.com/jefferislab/neuromorphr/issues">https://​github.com/​jefferislab/​neuromorphr/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/natverse/neuromorphr/issues">https://​github.com/​natverse/​neuromorphr/​issues</a>
 </li>
 </ul>
 </div>
@@ -234,7 +233,7 @@ pyramidal.cells =<span class="st"> </span><span class="kw"><a href="reference/ne
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
       </footer>
 </div>
