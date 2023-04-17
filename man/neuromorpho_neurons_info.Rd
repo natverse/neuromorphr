@@ -4,9 +4,14 @@
 \alias{neuromorpho_neurons_info}
 \title{Get all meta data associated with a neuron}
 \usage{
-neuromorpho_neurons_info(neuron_name = NULL, neuron_id = NULL,
-  batch.size = 10, progress = TRUE,
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_neurons_info(
+  neuron_name = NULL,
+  neuron_id = NULL,
+  batch.size = 10,
+  progress = TRUE,
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 

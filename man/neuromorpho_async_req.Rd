@@ -4,8 +4,14 @@
 \alias{neuromorpho_async_req}
 \title{Make multiple asynchronous http requests to neuromorpho.org}
 \usage{
-neuromorpho_async_req(urls, FUN = neuromorphr:::neuromorpho_parse_json,
-  batch.size = 10, progress = NULL, message = NULL, ...)
+neuromorpho_async_req(
+  urls,
+  FUN = neuromorphr:::neuromorpho_parse_json,
+  batch.size = 10,
+  progress = NULL,
+  message = NULL,
+  ...
+)
 }
 \arguments{
 \item{urls}{URLs to be queried}

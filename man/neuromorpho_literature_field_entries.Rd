@@ -4,8 +4,11 @@
 \alias{neuromorpho_literature_field_entries}
 \title{Return the available meta data entries for the literature for neuromorpho neuron}
 \usage{
-neuromorpho_literature_field_entries(field = "species",
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_literature_field_entries(
+  field = "species",
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{field}{a valid literature field, as returned by \code{neuromorpho_literature_fields}}
@@ -36,9 +39,10 @@ print(neuron.fields)
 
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_get_article}},
-  \code{\link{neuromorpho_literature_field_counts}},
-  \code{\link{neuromorpho_literature_fields}},
-  \code{\link{neuromorpho_literature_search}}
+Other literature functions: 
+\code{\link{neuromorpho_get_article}()},
+\code{\link{neuromorpho_literature_field_counts}()},
+\code{\link{neuromorpho_literature_fields}()},
+\code{\link{neuromorpho_literature_search}()}
 }
 \concept{literature functions}

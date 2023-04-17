@@ -4,8 +4,13 @@
 \alias{neuromorpho_get_article}
 \title{Get information on an article by querying an article ID}
 \usage{
-neuromorpho_get_article(article_id, batch.size = 10,
-  neuromorpho_url = "http://neuromorpho.org", progress = TRUE, ...)
+neuromorpho_get_article(
+  article_id,
+  batch.size = 10,
+  neuromorpho_url = "http://neuromorpho.org",
+  progress = TRUE,
+  ...
+)
 }
 \arguments{
 \item{article_id}{a unique neuromorpho article ID, number in the repository start from 1.
@@ -30,9 +35,10 @@ Returns a data frame describing an article; article_ids can be obtained using \c
 Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}.
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_literature_field_counts}},
-  \code{\link{neuromorpho_literature_field_entries}},
-  \code{\link{neuromorpho_literature_fields}},
-  \code{\link{neuromorpho_literature_search}}
+Other literature functions: 
+\code{\link{neuromorpho_literature_field_counts}()},
+\code{\link{neuromorpho_literature_field_entries}()},
+\code{\link{neuromorpho_literature_fields}()},
+\code{\link{neuromorpho_literature_search}()}
 }
 \concept{literature functions}

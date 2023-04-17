@@ -4,9 +4,15 @@
 \alias{neuromorpho_morphometry}
 \title{Return measurements for queried neurons}
 \usage{
-neuromorpho_morphometry(neuron_name = NULL, neuron_id = NULL,
-  batch.size = 10, data_frame = TRUE,
-  neuromorpho_url = "http://neuromorpho.org", progress = TRUE, ...)
+neuromorpho_morphometry(
+  neuron_name = NULL,
+  neuron_id = NULL,
+  batch.size = 10,
+  data_frame = TRUE,
+  neuromorpho_url = "http://neuromorpho.org",
+  progress = TRUE,
+  ...
+)
 }
 \arguments{
 \item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 

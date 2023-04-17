@@ -7,19 +7,39 @@
 \alias{neuromorpho_articles_from_neurons}
 \title{Convert neuromorpho neuron IDs into neuron names, or other information, and vica versa}
 \usage{
-neuromorpho_names_from_ids(neuron_id, progress = TRUE, batch.size = 10,
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_names_from_ids(
+  neuron_id,
+  progress = TRUE,
+  batch.size = 10,
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 
-neuromorpho_ids_from_names(neuron_name, progress = TRUE,
-  batch.size = 10, neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_ids_from_names(
+  neuron_name,
+  progress = TRUE,
+  batch.size = 10,
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 
-neuromorpho_field_entries_from_names(neuron_name, progress = TRUE,
-  batch.size = 10, neuromorpho_url = "http://neuromorpho.org",
-  field = "archive", ...)
+neuromorpho_field_entries_from_names(
+  neuron_name,
+  progress = TRUE,
+  batch.size = 10,
+  neuromorpho_url = "http://neuromorpho.org",
+  field = "archive",
+  ...
+)
 
-neuromorpho_articles_from_neurons(neuron_name = NULL, neuron_id = NULL,
-  progress = TRUE, search.type = c("doi", "pmid"),
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_articles_from_neurons(
+  neuron_name = NULL,
+  neuron_id = NULL,
+  progress = TRUE,
+  search.type = c("doi", "pmid"),
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{neuron_id}{a neuron ID, or vector of neuron IDs, as recorded in the neuromorpho database. If neuron_name is given

@@ -4,9 +4,11 @@
 \alias{neuromorpho_literature_search}
 \title{Make a custom literature search to the neuromorpho.org repository}
 \usage{
-
-  neuromorpho_literature_search(search_terms = c("species:Drosophila melanogaster"),
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_literature_search(
+  search_terms = c("species:Drosophila melanogaster"),
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{search_terms}{a vector of search terms, with each term formatted as \code{"field:field entry"}.
@@ -47,9 +49,10 @@ print(neuron.fields)
 
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_get_article}},
-  \code{\link{neuromorpho_literature_field_counts}},
-  \code{\link{neuromorpho_literature_field_entries}},
-  \code{\link{neuromorpho_literature_fields}}
+Other literature functions: 
+\code{\link{neuromorpho_get_article}()},
+\code{\link{neuromorpho_literature_field_counts}()},
+\code{\link{neuromorpho_literature_field_entries}()},
+\code{\link{neuromorpho_literature_fields}()}
 }
 \concept{literature functions}

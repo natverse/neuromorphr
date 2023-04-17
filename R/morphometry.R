@@ -147,7 +147,7 @@ neuromorpho_morphometry <- function(neuron_name = NULL,
 #' @rdname neuromorpho_persistence_vectors
 neuromorpho_persistence_vectors <- function(neuron_name = NULL, 
                                     neuron_id = NULL,
-                                    batch.size = 10,
+                                    batch.size = 5,
                                     progress = TRUE,
                                     neuromorpho_url = "http://neuromorpho.org",
                                     ...){

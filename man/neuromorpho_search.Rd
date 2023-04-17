@@ -4,9 +4,11 @@
 \alias{neuromorpho_search}
 \title{Make a custom neuron search to the neuromorpho.org repository}
 \usage{
-neuromorpho_search(search_terms = c("archive:Jacobs", "species:elephant",
-  "brain_region:cerebellum"), neuromorpho_url = "http://neuromorpho.org",
-  ...)
+neuromorpho_search(
+  search_terms = c("archive:Jacobs", "species:elephant", "brain_region:cerebellum"),
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{search_terms}{a vector of search terms, with each term formatted as \code{"field:field entry"}.

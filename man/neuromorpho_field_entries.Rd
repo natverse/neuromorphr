@@ -4,8 +4,11 @@
 \alias{neuromorpho_field_entries}
 \title{Return the available meta data entries for neuromorpho neuron fields}
 \usage{
-neuromorpho_field_entries(field = "species",
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_field_entries(
+  field = "species",
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}

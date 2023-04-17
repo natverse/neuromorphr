@@ -4,8 +4,11 @@
 \alias{neuromorpho_field_counts}
 \title{Get the number of different entries for a neuromorpho neuron field}
 \usage{
-neuromorpho_field_counts(field = "species",
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_field_counts(
+  field = "species",
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}

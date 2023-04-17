@@ -5,13 +5,26 @@
 \alias{neuromorpho_read_neuron}
 \title{Read neurons from neuromorpho.org}
 \usage{
-neuromorpho_read_neurons(neuron_name = NULL, neuron_id = NULL,
-  nat = TRUE, batch.size = 2, meta = TRUE, light = TRUE,
-  find = FALSE, progress = TRUE,
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_read_neurons(
+  neuron_name = NULL,
+  neuron_id = NULL,
+  nat = TRUE,
+  batch.size = 2,
+  meta = TRUE,
+  light = TRUE,
+  find = FALSE,
+  progress = TRUE,
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 
-neuromorpho_read_neuron(neuron_name = NULL, neuron_id = NULL,
-  nat = TRUE, neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_read_neuron(
+  neuron_name = NULL,
+  neuron_id = NULL,
+  nat = TRUE,
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{neuron_name}{a neuron name, or vector of neuron names, as recorded in the neuromorpho database. Names and neuron IDs 

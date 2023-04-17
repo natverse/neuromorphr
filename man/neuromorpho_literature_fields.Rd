@@ -4,9 +4,7 @@
 \alias{neuromorpho_literature_fields}
 \title{Return the available meta data fields for the literature for neuromorpho neurons}
 \usage{
-
-  neuromorpho_literature_fields(neuromorpho_url = "http://neuromorpho.org",
-  ...)
+neuromorpho_literature_fields(neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
 \item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}
@@ -27,9 +25,10 @@ print(lit.fields)
 
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_get_article}},
-  \code{\link{neuromorpho_literature_field_counts}},
-  \code{\link{neuromorpho_literature_field_entries}},
-  \code{\link{neuromorpho_literature_search}}
+Other literature functions: 
+\code{\link{neuromorpho_get_article}()},
+\code{\link{neuromorpho_literature_field_counts}()},
+\code{\link{neuromorpho_literature_field_entries}()},
+\code{\link{neuromorpho_literature_search}()}
 }
 \concept{literature functions}

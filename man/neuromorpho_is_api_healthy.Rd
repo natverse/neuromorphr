@@ -4,8 +4,7 @@
 \alias{neuromorpho_is_api_healthy}
 \title{Check whether the neuromorpho.org API is up and running}
 \usage{
-neuromorpho_is_api_healthy(neuromorpho_url = "http://neuromorpho.org",
-  ...)
+neuromorpho_is_api_healthy(neuromorpho_url = "http://neuromorpho.org", ...)
 }
 \arguments{
 \item{neuromorpho_url}{the base URL for querying the neuromorpho database, defaults to \url{http://neuromorpho.org}}

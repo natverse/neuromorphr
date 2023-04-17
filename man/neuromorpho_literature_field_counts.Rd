@@ -4,8 +4,11 @@
 \alias{neuromorpho_literature_field_counts}
 \title{Get the number of different articles for a neuromorpho literature field}
 \usage{
-neuromorpho_literature_field_counts(field = "tracingSystem",
-  neuromorpho_url = "http://neuromorpho.org", ...)
+neuromorpho_literature_field_counts(
+  field = "tracingSystem",
+  neuromorpho_url = "http://neuromorpho.org",
+  ...
+)
 }
 \arguments{
 \item{field}{a valid neuron field, as returned by \code{neuromorpho_fields}}
@@ -22,9 +25,10 @@ E.g. you can find out how the number of papers that used particular neuron recon
 Articles can also be searched in a web browser at \url{http://neuromorpho.org/LS.jsp}.
 }
 \seealso{
-Other literature functions: \code{\link{neuromorpho_get_article}},
-  \code{\link{neuromorpho_literature_field_entries}},
-  \code{\link{neuromorpho_literature_fields}},
-  \code{\link{neuromorpho_literature_search}}
+Other literature functions: 
+\code{\link{neuromorpho_get_article}()},
+\code{\link{neuromorpho_literature_field_entries}()},
+\code{\link{neuromorpho_literature_fields}()},
+\code{\link{neuromorpho_literature_search}()}
 }
 \concept{literature functions}
