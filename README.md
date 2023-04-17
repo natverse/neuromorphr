@@ -17,8 +17,8 @@ Firstly, you will need R, R Studio and X Quartz as well as nat and its dependenc
 
 ``` r
 # install
-if (!require("devtools")) install.packages("devtools")
-devtools::install_github("jefferislab/neuromorphr")
+if (!require("remotes")) install.packages("remotes")
+remotes::install_github("natverse/neuromorphr")
 
 # use 
 library(neuromorphr)
