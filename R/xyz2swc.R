@@ -152,7 +152,7 @@ xyz2swc_convert <- function(source_dir = NULL,
     timestamp <- format(Sys.time(), "%Y%m%d_%H%M%S")
     
     # Write
-    write.csv(res.df, file = file.path(dirname(target_zip),sprintf("%s_swc_conversion_log.csv",timestamp)))
+    utils::write.csv(res.df, file = file.path(dirname(target_zip),sprintf("%s_swc_conversion_log.csv",timestamp)))
   }
   # Return res.df
   res.df

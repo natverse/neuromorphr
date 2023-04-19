@@ -19,7 +19,7 @@ Suggests:
     rmarkdown,
     covr
 Depends: R (>= 2.10)
-Imports: httr, jsonlite, nat, curl, utils, readobj, rvest, plyr, pbapply
+Imports: httr, jsonlite, nat, curl, utils, rvest, plyr, pbapply
 Encoding: UTF-8
 Language: en-GB
 RoxygenNote: 7.2.1
